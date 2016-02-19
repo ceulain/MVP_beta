@@ -1,0 +1,44 @@
+<div class="container" ng-controller="MainCtrl as main">
+  <h3>Joueurs</h3>
+  <table class="table edit">
+    <thead>
+      <tr>
+        <th>Nom</th>
+        <th>Prenom</th>
+        <th>Position</th>
+    	<th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="player in main.players">
+    	<td><input type="text" ng-model="player.firstName" ng-blur="main.updatePlayer(player)"/></td>
+    	<td><input type="text" ng-model="player.lastName" ng-blur="main.updatePlayer(player)"/></td>
+    	<td><input type="text" ng-model="player.position" ng-blur="main.updatePlayer(player)"/></td>
+    	<td>
+          <button type="button" class="btn btn-link" ng-click="main.removePlayer(player)">Remove</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="well">
+    <h3>Ajoutez vous joueurs</h3>
+    <form class="form-inline" role="form" novalidate ng-submit="main.addPlayer()">
+      <div class="form-group">
+    	<input type="text" class="form-control" ng-model="main.newPlayer.firstName" placeholder="Prenom">
+      </div>
+      <div class="form-group">
+    	<input type="text" class="form-control" ng-model="main.newPlayer.lastName" placeholder="Nom">
+      </div>
+      <div class="form-group">
+    	<input type="text" class="form-control" ng-model="main.newPlayer.position" placeholder="Post">
+      </div>
+      <button type="submit"  class="btn btn-default">Ajouter</button>
+    </form>
+  </div>
+  <button class="btn btn-default"><a ng-href="stat.html">Passer à l'étape suivante</a></button>
+</div>
+
+
+
+

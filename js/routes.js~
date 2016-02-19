@@ -1,0 +1,6 @@
+angular.module('mvp').
+    config(function($routeProvider){
+	$routeProvider.when('/stat.html', {})
+
+	.when('/stats_player.html', {})
+    }

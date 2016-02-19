@@ -1,0 +1,9 @@
+
+<div class="container" ng-controller="SecondCtrl as snd">
+  <div ng-repeat="player in snd.players">
+    <div class="col-xs-6" style="margin-top: 15px">
+      <button ng-click="snd.selectStat(player)" class="btn btn-default btn-block btn-lg"><a ui-sref="stat">{{player.firstName}} {{player.lastName}}</a></button>
+    </div>
+  </div>
+</div>
+
