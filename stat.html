@@ -1,12 +1,23 @@
 <div class="container" ng-controller="MainCtrl as main"> 
-  
-  <div class="col-md-12">
-    <a ui-sref="stat_players" class="btn btn-default" ng-click="main.setCurrentStat('but')">But</a> 
-    <a ui-sref="stat_players" class="btn btn-default" ng-click="main.setCurrentStat('passD')">Passe décisive</a> 
-    <a ui-sref="stat_players" class="btn btn-default" ng-click="main.setCurrentStat('tirC')">Tir cadrés</a> 
-    <a ui-sref="stat_players" class="btn btn-default" ng-click="main.setCurrentStat('ballP')">Balle Perdu</a> 
-  </div>
-  
+	<div class="row" style="margin-top: 30px">
+
+
+		<div class="col-md-12">
+			<a ui-sref="stat_players" class="btn btn-default" ng-click="main.setCurrentStat('But')">But</a> 
+			<a ui-sref="stat_players" class="btn btn-default" ng-click="main.setCurrentStat('TC')">Tir cadré</a> 
+			<a ui-sref="stat_players" class="btn btn-default" ng-click="main.setCurrentStat('TNC')">Tir non cadré</a> 
+			<a ui-sref="stat_players" class="btn btn-default" ng-click="main.setCurrentStat('To')">Touche</a>
+			<a ui-sref="stat_players" class="btn btn-default" ng-click="main.setCurrentStat('GD')">Geste défensif</a> 
+		</div>
+		<a ui-sref="stat_players" class="btn btn-info" style="margin-left: 30px;
+		margin-top: 30px;">Voir les stats</a>
+	</div>
+
+
+	
+
+	
+
 </div>
 
 

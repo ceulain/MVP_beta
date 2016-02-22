@@ -1,5 +1,0 @@
-.edit input[type=text]:hover,
-.edit input[type=text]:focus {
-    border: 1px solid #d7cebf;
-    outline: none
-}
