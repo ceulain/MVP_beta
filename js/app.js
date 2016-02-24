@@ -44,6 +44,9 @@ angular.module('mvp', ['firebase', 'ui.router'])
 		}else if( PlayerService.getCurrentStat() === "To"){
 			currentPlayer.To = parseInt(currentPlayer.To, 10) + 1;
 
+		}else if( PlayerService.getCurrentStat() === "PB"){
+			currentPlayer.To = parseInt(currentPlayer.To, 10) + 1;
+
 		}else if( PlayerService.getCurrentStat() === "GD"){
 			currentPlayer.GD = parseInt(currentPlayer.GD, 10) + 1;
 
@@ -58,7 +61,7 @@ angular.module('mvp', ['firebase', 'ui.router'])
 .controller('MainCtrl', function (PlayerService){
 	
 	var main = this;
-	main.newPlayer = { firstName: '', lastName: '', maillot: '', But: 0, TC: 0, TNC: 0, To: 0, GD: 0};
+	main.newPlayer = { firstName: '', lastName: '', maillot: '', But: 0, TC: 0, TNC: 0, To: 0, GD: 0, PB: 0};
 	main.currentPlayer = null; 
 	main.players = PlayerService.getPlayers();
 	
@@ -77,7 +80,7 @@ angular.module('mvp', ['firebase', 'ui.router'])
 	main.addPlayer = function() {
 		PlayerService.addPlayer(angular.copy(main.newPlayer));
 		console.log(main.players);
-		main.newPlayer = { firstName: '', lastName: '', maillot: '', But: 0, TC: 0, TNC: 0, To: 0, GD: 0};
+		main.newPlayer = { firstName: '', lastName: '', maillot: '', But: 0, TC: 0, TNC: 0, To: 0, GD: 0, PB: 0};
 	};
 
 	main.removePlayer = function(player) {

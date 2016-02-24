@@ -10,9 +10,9 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="contestant in main.contestants">
-                    <td>{{contestant.lane}}</td>
-                    <td>{{contestant.name}}</td>
+                <tr ng-repeat="player in main.players">
+                    <td>{{player.maillot}}</td>
+                    <td>{{player.firstName}}</td>
                     <!-- <td>{{contestant.score}}</td> -->
                 </tr>
             </tbody>
@@ -29,14 +29,14 @@
                 <tr>
                     <th></th>
                     <th></th>
-                    <th ng-repeat="contestant in main.contestants">{{contestant.name}}</th>
+                    <th ng-repeat="player in main.players">{{player.firstName}}</th>
                     <th>Ballons donnés</th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="contestant in main.contestants">
-                    <td>{{contestant.lane}}</td>
-                    <td>{{contestant.name}}</td>
+                <tr ng-repeat="player in main.players">
+                    <td>{{player.maillot}}</td>
+                    <td>{{player.firstName}}</td>
                 </tr>
             </tbody>
             <tfoot>
