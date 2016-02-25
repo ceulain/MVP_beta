@@ -98,6 +98,21 @@ angular.module('mvp', ['firebase', 'ui.router'])
 	var service = this;
 	var currentStat = {stat : ''};
 	var ref = new Firebase(FIREBASE_URI);
+	// creation table club
+	var refClub = ref.child("club");
+	refClub.push({name :"real madrid"});
+	refClub.push({name :"psg"});
+	// creation noeud team dans club
+	var refTeam = refClub.child('U17A');
+	// creation noeud entraineur dans equipe
+	var refTrainer = refTeam.child('trainer').push({ name : 'Zizou'});
+	// creation noeud joueurs dans equipe
+	var refPlayers = refTeam.child('players').push({ firstName : 'Ceulain', lastName : 'Bansimba', maillot : '1', });
+	// creation noeud match dans equipe
+	var refMatch = refTeam.child('match').push({ stat : '[statDuMatch]', adversaire : 'Neuilly', date : '24 fevrier 2016'});
+	
+
+
 	var players = $firebaseArray(ref);
 
 	service.setCurrentStat = function(stat){
