@@ -1,56 +1,52 @@
 <div class="container" ng-controller="MainCtrl as main">
   <div class="row" style="margin-top: 30px">
-
     <div class="col-xs-6">
       <div class="well">
         <h3>Ajoutez vous joueurs</h3>
-        <form class="form" role="form" novalidate ng-submit="main.addPlayer()">
+        <form class="form" role="form" novalidate ng-submit="main.addPlayer(main.maillot, main.firstName, main.lastName)">
           <div class="form-group">
-            <input type="text" class="form-control" ng-model="main.newPlayer.maillot" placeholder="N° maillot">
+            <input type="text" class="form-control" ng-model="main.maillot" placeholder="N° maillot">
           </div>
           <div class="form-group">
-            <input type="text" class="form-control" ng-model="main.newPlayer.firstName" placeholder="Prénom">
+            <input type="text" class="form-control" ng-model="main.firstName" placeholder="Prénom">
           </div>
           <div class="form-group">
-           <input type="text" class="form-control" ng-model="main.newPlayer.lastName" placeholder="Nom">
-         </div>
+            <input type="text" class="form-control" ng-model="main.lastName" placeholder="Nom">
+          </div>
 
-         <button type="submit"  class="btn btn-default">Ajouter</button>
-       </form>
-     </div>
-     <button class="btn btn-info"><a ui-sref="stat">Passer à l'étape suivante</a></button>
-   </div>
+          <button type="submit"  class="btn btn-default">Ajouter</button>
+	</form>
+      </div>
+      <button class="btn btn-info"><a ui-sref="stat">Début du match</a></button>
+    </div>
 
 
-   <div class="col-xs-6 col-sm-12">
+  </div>
+  <div class="col-xs-6 col-sm-12">
     <h3>Mes Joueurs</h3>
     <table class="table edit">
       <thead>
-       <tr>
-        <th>N° maillot</th>
-        <th>Prénom</th>
-        <th>Nom</th>
+	<tr>
+          <th>N° maillot</th>
+          <th>Prénom</th>
+          <th>Nom</th>
 
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-
-      <tr ng-repeat="player in main.players">
-
-        <td><input type="text" ng-model="player.maillot" ng-blur="main.updatePlayer(player)"/></td>
-
-        <td><input type="text" ng-model="player.firstName" ng-blur="main.updatePlayer(player)"/></td>
-        <td><input type="text" ng-model="player.lastName" ng-blur="main.updatePlayer(player)"/></td>
-        <td>
-          <button type="button" class="btn btn-link" ng-click="main.removePlayer(player)">Remove</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-</div>
-
+          <th></th>
+	</tr>
+      </thead>
+      <tbody>
+	<tr ng-repeat="player in main.players">
+          <td><input type="text" ng-model="player.numero" ng-blur="main.updatePlayer(player)"/></td>
+          <td><input type="text" ng-model="player.prenom" ng-blur="main.updatePlayer(player)"/></td>
+          <td><input type="text" ng-model="player.nom" ng-blur="main.updatePlayer(player)"/></td>
+          <td>
+            <button type="button" class="btn btn-link" ng-click="main.removePlayer(player)">Remove</button>
+          </td>
+	</tr>
+      </tbody>
+    </table>
+  </div>
+  
 </div>
 
 

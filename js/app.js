@@ -1,144 +1,139 @@
 angular.module('mvp', ['firebase', 'ui.router'])
-.constant('FIREBASE_URI', 'https://boos.firebaseio.com/')
+    .constant('FIREBASE_URI', 'https://boos.firebaseio.com/')
 
-.config(function config($stateProvider){
+    .config(function config($stateProvider){
 	$stateProvider.state('index', {
-		url: "",
-		controller: "MainCtrl as main",
-		templateUrl : 'players.html'
+	    url: "",
+	    controller: "TeamCtrl as team",
+	    templateUrl: 'match.html'
+	})
+
+	$stateProvider.state('match', {
+	    url: "/match",
+	    controller: "MainCtrl as main",
+	    templateUrl : 'players.html'
 	})
 	$stateProvider.state('stat',{
-		url: "/stat",
-		controller: "MainCtrl as main",
-		templateUrl: 'stat.html'
+	    url: "/stat",
+	    controller: "MainCtrl as second",
+	    templateUrl: 'stat.html'
 
 	})
 	$stateProvider.state('stat_players',{
-		url: "/stat_player",
-		controller: "SecondCtrl as snd",
-		templateUrl: 'stats_player.html'
+	    url: "/stat_player",
+	    controller: "ThirdCtrl as third",
+	    templateUrl: 'stats_player.html'
 
 	})
 	
-})
+    })
 
 
-.controller('SecondCtrl', function (PlayerService){
+    .controller('ThirdCtrl', function(MatchService){
+	var third = this;
 	
-	var snd = this;
+	third.players = MatchService.getPlayers();
+    })
+    .controller('SecondCtrl', function(MatchService){
+	var second = this;
 	
-	snd.players = PlayerService.getPlayers();
-	snd.stat = PlayerService.getCurrentStat();
-	snd.selectStat = function (currentPlayer) {
-		console.log(snd.stat, currentPlayer);
+	second.schemaMatch = [];
+	second.schema = [];
+	
+	second.players = MatchService.getPlayers();
 
-		if( PlayerService.getCurrentStat() === "But"){
-			currentPlayer.But = parseInt(currentPlayer.But, 10) + 1;
-
-		}else if( PlayerService.getCurrentStat() === "TC"){
-			currentPlayer.TC = parseInt(currentPlayer.TC, 10) + 1;
-
-		}else if( PlayerService.getCurrentStat() === "TNC"){
-			currentPlayer.TNC = parseInt(currentPlayer.TNC, 10) + 1;
-
-		}else if( PlayerService.getCurrentStat() === "To"){
-			currentPlayer.To = parseInt(currentPlayer.To, 10) + 1;
-
-		}else if( PlayerService.getCurrentStat() === "PB"){
-			currentPlayer.To = parseInt(currentPlayer.To, 10) + 1;
-
-		}else if( PlayerService.getCurrentStat() === "GD"){
-			currentPlayer.GD = parseInt(currentPlayer.GD, 10) + 1;
-
-		}else{
-			alert('No current stat');
-		}
-		PlayerService.updatePlayer(currentPlayer);
+	second.statCount = function(player) {
+	    second.schema.push(player.nom + " " + player.prenom + " "+player.numero);
+	    console.log(second.schema);
+	    
+	    
 	};
 	
-})
+	second.setCurrentStat = function(stat){
+	    second.schema.push(stat);
+	    second.schemaMatch.push(second.schema);
+	    console.log(second.schemaMatch);
+	    second.schema = [];
+	};
 
-.controller('MainCtrl', function (PlayerService){
-	
+	second.addSchema = function(schema){
+	    MatchService.addSchemaMatch(schema);
+	};
+    })
+    .controller('MainCtrl', function(MatchService){
 	var main = this;
-	main.newPlayer = { firstName: '', lastName: '', maillot: '', But: 0, TC: 0, TNC: 0, To: 0, GD: 0, PB: 0};
-	main.currentPlayer = null; 
-	main.players = PlayerService.getPlayers();
-	
-
-	main.setCurrentStat = function(stat){
-		PlayerService.setCurrentStat(stat);
-		console.log(PlayerService.getCurrentStat());
-
+	main.players = MatchService.getPlayers();
+	console.log(main.players);
+	main.addPlayer = function(numero,nom,prenom){
+	    MatchService.addPlayer(numero,nom,prenom);
+	    //main.players = MatchService.getPlayers();
 	};
 	
+	main.removePlayer = function(player){
+	    console.log('remove');
+	    MatchService.removePlayer(player);
+	};
+
 	
-	main.selectStat = function (currentPlayer) {
-		PlayerService.selectStat(currentPlayer)
+    })
+    .controller('TeamCtrl', function (MatchService){
+
+	var team = this;
+	
+	team.createClub = function(club, name_team, coach){
+	    console.log('ok');
+	    MatchService.createClub(club, name_team, coach);
 	};
-
-	main.addPlayer = function() {
-		PlayerService.addPlayer(angular.copy(main.newPlayer));
-		console.log(main.players);
-		main.newPlayer = { firstName: '', lastName: '', maillot: '', But: 0, TC: 0, TNC: 0, To: 0, GD: 0, PB: 0};
-	};
-
-	main.removePlayer = function(player) {
-		PlayerService.removePlayer(player);
-	};
-
-	main.updatePlayer = function (player) {
-		PlayerService.updatePlayer(player);
-	};
-})
-
-
-
-.service('PlayerService', function($firebaseArray, FIREBASE_URI){
+	
+	
+    })
+    .service('MatchService', function($firebaseArray, FIREBASE_URI){
 	var service = this;
-	var currentStat = {stat : ''};
-	var ref = new Firebase(FIREBASE_URI);
-	// creation table club
-	var refClub = ref.child("club");
-	refClub.push({name :"real madrid"});
-	refClub.push({name :"psg"});
-	// creation noeud team dans club
-	var refTeam = refClub.child('U17A');
-	// creation noeud entraineur dans equipe
-	var refTrainer = refTeam.child('trainer').push({ name : 'Zizou'});
-	// creation noeud joueurs dans equipe
-	var refPlayers = refTeam.child('players').push({ firstName : 'Ceulain', lastName : 'Bansimba', maillot : '1', });
-	// creation noeud match dans equipe
-	var refMatch = refTeam.child('match').push({ stat : '[statDuMatch]', adversaire : 'Neuilly', date : '24 fevrier 2016'});
+	service.name_team = null;	
+	service.club = null;
+	service.players = null;
+	service.refPlayers = null;
+	service.refMatchs = null;
+	service.match = null;
+	console.log('hello');
 	
+	service.createClub = function(club, name_team, coach){
+	    service.name_team = name_team;	
+	    service.club = club
+	    service.refPlayers = new Firebase(FIREBASE_URI+'/boostalent/'+service.club+'/'+service.name_team+'/players/');
+	    service.refMatchs = new Firebase(FIREBASE_URI+'/boostalent/'+service.club+'/'+service.name_team+'/matchs/');
+	    service.match = $firebaseArray(service.refMatchs);
+	    service.players =  $firebaseArray(service.refPlayers);
+	    var ref = new Firebase(FIREBASE_URI+'/boostalent/'+club+'/'+name_team);
+	    $firebaseArray(ref).$add({name_coach: coach});
+	    return ref;
+	};
 
+	service.addPlayer = function(numero,nom,prenom){
+	    // var ref = new Firebase(FIREBASE_URI+'/boostalent/'+service.club+'/'+service.name_team+'/players/');
+	    $firebaseArray(service.refPlayers).$add({numero: numero, nom: nom, prenom: prenom});
+	    console.log(service.players);
+	};
 
-	var players = $firebaseArray(ref);
-
-	service.setCurrentStat = function(stat){
-		currentStat = stat;
-		console.log(currentStat);
+	service.removePlayer = function(player){
+	    
+	    service.players.$remove(player);
+	};
+	service.getPlayers = function(){
+	    return service.players;
 	};
 	
-	service.getCurrentStat = function(){ 
-		return currentStat; 
-	};
-	
-	
-	
-	service.getPlayers = function () {
-		return players;
+	service.getMatch = function(){
+	    return service.match;
 	};
 
-	service.addPlayer = function (player) {
-		players.$add(player);
-	};
+	service.addSchemaMatch = function(schema){
+	    service.match.$add(schema);
+	}
+	
+	service.getSchema = function(){
+	    service.match;
+	}
+	
+    });
 
-	service.removePlayer = function (player) {
-		players.$remove(player);
-	};
-
-	service.updatePlayer = function (player) {
-		players.$save(player);
-	};
-});

@@ -1,30 +1,24 @@
-<div class="container" ng-controller="MainCtrl as main"> 
-	<div class="row" style="margin-top: 30px">
+<div class="container" ng-controller="SecondCtrl as second"> 
+  <div class="row" style="margin-top: 30px">
 
+    <div class="col-md-12"> 
+      <a class="btn btn-default" ng-click="second.setCurrentStat('but')">But</a>
 
-		<div class="col-md-12">
-			<a class="btn btn-default" ng-click="main.setCurrentStat('But')">But</a>
+      <a class="btn btn-default" ng-click="second.setCurrentStat('tir_cadre')">Tir cadré</a>
+      <a class="btn btn-default" ng-click="second.setCurrentStat('tir_non_cadre')">Tir non cadré</a>
 
-			<a class="btn btn-default" ng-click="main.setCurrentStat('TC')">Tir cadré</a> 
-			<a ui-sref="stat_players" class="btn btn-default" ng-click="main.setCurrentStat('TNC')">Tir non cadré</a> 
+      <a class="btn btn-default" ng-click="second.setCurrentStat('geste_defensif')">Geste défensif</a>
 
-			<a class="btn btn-default" ng-click="main.setCurrentStat('To')">Touche</a>
+      <a class="btn btn-default" ng-click="second.setCurrentStat('ballon_perdu')">Ballon Perdu</a>
+    </div>
 
-			<a class="btn btn-default" ng-click="main.setCurrentStat('GD')">Geste défensif</a> 
+    <div class="col-md-12">
+      <a ng-repeat="player in second.players"  class="btn btn-default" ng-click="second.statCount(player)">{{player.prenom + " " + player.nom}}</a> 
+    </div>
 
-			<a class="btn btn-default" ng-click="main.setCurrentStat('PB')">Perte de Ballon</a> 
-		</div>
-		<div class="col-md-12">
-			<a ng-repeat="player in main.players" class="btn btn-default" ng-click="">{{player.firstName}}</a> 
-		</div>
-
-		<a ui-sref="stat_players" class="btn btn-info" style="margin-left: 30px; margin-top: 30px;">Voir les stats du match</a>
-	</div>
-
-
-	
-
-	
+    <a class="btn btn-info" ui-sref="stat_players" style="margin-left: 30px; margin-top: 30px;" ng-click="second.addSchema(second.schemaMatch)">Voir les stats du match</a>
+    
+  </div>
 
 </div>
 
