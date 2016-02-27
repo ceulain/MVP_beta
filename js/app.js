@@ -36,6 +36,16 @@ angular.module('mvp', ['firebase', 'ui.router'])
 	console.log(third.players);
 	third.schema = MatchService.getSchema();
 
+	third.totalStat = function(stat){
+	    var total = 0;
+	    for(var i = 0 , x = third.players.length; i < x; i++){
+
+		total +=  third.players[i][stat];
+	    }
+	    
+	    return total;
+	}
+
     })
 
 
@@ -144,9 +154,9 @@ angular.module('mvp', ['firebase', 'ui.router'])
 	    // var ref = new Firebase(FIREBASE_URI+'/boostalent/'+service.club+'/'+service.name_team+'/players/');
 	    $firebaseArray(service.refPlayers).$add({numero: numero, nom: nom, 
 						     prenom: prenom, but: 0, tir_cadre: 0,
-						    tir_non_cadre: 0, geste_defensif: 0,
-						    ballon_perdu: 0, passe_decisive: 0,
-						    avant_passe_decisive: 0});
+						     tir_non_cadre: 0, geste_defensif: 0,
+						     ballon_perdu: 0, passe_decisive: 0,
+						     avant_passe_decisive: 0});
 	    console.log(service.players);
 	};
 
