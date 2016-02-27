@@ -103,7 +103,9 @@ angular.module('mvp', ['firebase', 'ui.router'])
 	console.log(main.players);
 	main.addPlayer = function(numero,nom,prenom){
 	    MatchService.addPlayer(numero,nom,prenom);
-	    //main.players = MatchService.getPlayers();
+	    main.numero = "";
+	    main.prenom = "";
+	    main.nom = "";
 	};
 	
 	main.removePlayer = function(player){
