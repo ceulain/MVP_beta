@@ -1,4 +1,4 @@
-<div class="container" ng-controller="ThirdCtrl as third">
+<div class="container">
   <h3>Mon équipe</h3>
   <div class="well">
     <table class="table">
@@ -18,10 +18,10 @@
       </tbody>
     </table>
   </div>
-</div>
 
 
-<div class="container" ng-controller="ThirdCtrl as third">
+
+
   <h3>Tableau d'analyse brut (passes)</h3>
   <div class="well">
     <table class="table">
@@ -49,43 +49,44 @@
       </tfoot>
     </table>
   </div>
+
+  <h3>Tableau récapitulatif général</h3>
+  <div class="well">
+    <table class="table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Min</th>
+          <th>Ballons perdus</th>
+          <th>Geste Défensif</th>
+          <th>Tir Non Cadré</th>
+          <th>Tir Cadré</th>
+          <th>Passe Décisive</th>
+          <th>Avant Passe Décisive</th>
+          <th>But</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="player in third.players">
+          <td>{{player.nom +" "+player.prenom}}</td>
+	  <td></td>
+	  <td>{{player.ballon_perdu}}</td>
+	  <td>{{player.geste_defensif}}</td>
+	  <td>{{player.tir_non_cadre}}</td>
+	  <td>{{player.tir_cadre}}</td>
+	  <td>{{player.avant_passe_decisive}}</td>
+	  <td>{{player.passe_decisive}}</td>
+	  <td>{{player.but}}</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td></td>
+          <td><b>Total</b></td>
+	  
+
+        </tr>
+      </tfoot>
+    </table>
+  </div>
 </div>
-
-<!-- <div class="container" ng-controller="ThirdCtrl as third"> -->
-<!--   <h3>Tableau récapitulatif général</h3> -->
-<!--   <div class="well"> -->
-<!--     <table class="table"> -->
-<!--       <thead> -->
-<!--         <tr> -->
-<!--           <th></th> -->
-<!--           <th></th> -->
-<!--           <th>Min</th> -->
-<!--           <th>Ballons joués</th> -->
-<!--           <th>Ballons perdus</th> -->
-<!--           <th>% passes</th> -->
-<!--           <th>Ballons Récupérés</th> -->
-<!--           <th>Geste Défensif</th> -->
-<!--           <th>% relance</th> -->
-<!--           <th>Tir</th> -->
-<!--           <th>Tir Cadré</th> -->
-<!--           <th>Passe Décisive</th> -->
-<!--           <th>But</th> -->
-<!--         </tr> -->
-<!--       </thead> -->
-<!--       <tbody> -->
-<!--         <tr ng-repeat="player in third.players"> -->
-<!--           <td>{{player.maillot}}</td> -->
-<!--           <td>{{player.firstName}}</td> -->
-<!--         </tr> -->
-<!--       </tbody> -->
-<!--       <tfoot> -->
-<!--         <tr> -->
-<!--           <td></td> -->
-<!--           <td><b>Total</b></td> -->
-
-
-<!--         </tr> -->
-<!--       </tfoot> -->
-<!--     </table> -->
-<!--   </div> -->
-<!-- </div> -->
