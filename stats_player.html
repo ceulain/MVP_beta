@@ -1,91 +1,91 @@
-<div class="container" ng-controller="MainCtrl as main">
-    <h3>Mon équipe</h3>
-    <div class="well">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Maillot</th>
-                    <th>Joueur</th>
-                    <!-- <th>Score</th> -->
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="player in main.players">
-                    <td>{{player.maillot}}</td>
-                    <td>{{player.firstName}}</td>
-                    <!-- <td>{{contestant.score}}</td> -->
-                </tr>
-            </tbody>
-        </table>
-    </div>
+<div class="container" ng-controller="ThirdCtrl as third">
+  <h3>Mon équipe</h3>
+  <div class="well">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Maillot</th>
+          <th>Joueur</th>
+          <!-- <th>Score</th> -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="player in third.players">
+          <td>{{player.numero}}</td>
+          <td>{{player.nom}}</td>
+          <!-- <td>{{contestant.score}}</td> -->
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 
 
-<div class="container" ng-controller="MainCtrl as main">
-    <h3>Tableau d'analyse brut (passes)</h3>
-    <div class="well">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th></th>
-                    <th ng-repeat="player in main.players">{{player.firstName}}</th>
-                    <th>Ballons donnés</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="player in main.players">
-                    <td>{{player.maillot}}</td>
-                    <td>{{player.firstName}}</td>
-                </tr>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td></td>
-                    <td><b>Ballons reçus</b></td>
-                    
+<div class="container" ng-controller="ThirdCtrl as third">
+  <h3>Tableau d'analyse brut (passes)</h3>
+  <div class="well">
+    <table class="table">
+      <thead>
+        <tr>
+          <th></th>
+          <th></th>
+          <th ng-repeat="player in third.players">{{player.nom}}</th>
+          <th>Ballons donnés</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="player in third.players">
+          <td>{{player.numero}}</td>
+          <td>{{player.nom}}</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td></td>
+          <td><b>Ballons reçus</b></td>
+          
 
-                </tr>
-            </tfoot>
-        </table>
-    </div>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
 </div>
 
-<div class="container" ng-controller="MainCtrl as main">
-    <h3>Tableau récapitulatif général</h3>
-    <div class="well">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th></th>
-                    <th>Min</th>
-                    <th>Ballons joués</th>
-                    <th>Ballons perdus</th>
-                    <th>% passes</th>
-                    <th>Ballons Récupérés</th>
-                    <th>Geste Défensif</th>
-                    <th>% relance</th>
-                    <th>Tir</th>
-                    <th>Tir Cadré</th>
-                    <th>Passe Décisive</th>
-                    <th>But</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="player in main.players">
-                    <td>{{player.maillot}}</td>
-                    <td>{{player.firstName}}</td>
-                </tr>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td></td>
-                    <td><b>Total</b></td>
-                    
+<!-- <div class="container" ng-controller="ThirdCtrl as third"> -->
+<!--   <h3>Tableau récapitulatif général</h3> -->
+<!--   <div class="well"> -->
+<!--     <table class="table"> -->
+<!--       <thead> -->
+<!--         <tr> -->
+<!--           <th></th> -->
+<!--           <th></th> -->
+<!--           <th>Min</th> -->
+<!--           <th>Ballons joués</th> -->
+<!--           <th>Ballons perdus</th> -->
+<!--           <th>% passes</th> -->
+<!--           <th>Ballons Récupérés</th> -->
+<!--           <th>Geste Défensif</th> -->
+<!--           <th>% relance</th> -->
+<!--           <th>Tir</th> -->
+<!--           <th>Tir Cadré</th> -->
+<!--           <th>Passe Décisive</th> -->
+<!--           <th>But</th> -->
+<!--         </tr> -->
+<!--       </thead> -->
+<!--       <tbody> -->
+<!--         <tr ng-repeat="player in third.players"> -->
+<!--           <td>{{player.maillot}}</td> -->
+<!--           <td>{{player.firstName}}</td> -->
+<!--         </tr> -->
+<!--       </tbody> -->
+<!--       <tfoot> -->
+<!--         <tr> -->
+<!--           <td></td> -->
+<!--           <td><b>Total</b></td> -->
 
-                </tr>
-            </tfoot>
-        </table>
-    </div>
-</div>
+
+<!--         </tr> -->
+<!--       </tfoot> -->
+<!--     </table> -->
+<!--   </div> -->
+<!-- </div> -->
