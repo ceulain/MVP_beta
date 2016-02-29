@@ -36,11 +36,12 @@ angular.module('mvp', ['firebase', 'ui.router'])
 
 	third.schema = MatchService.getSchema();
 	console.log(third.schema);
-	third.totalStat = function(stat){
-	    var total = 0;
-	    for(var i = 0 , x = third.players.length; i < x; i++){
 
-		total +=  third.players[i][stat];
+	third.totalStat = function(stat){
+	    
+	    var total = 0;
+	    for( var i = 0 , x = third.players.length; i < x; i++ ){
+		total += third.players[i][stat];
 	    }
 	    
 	    return total;
