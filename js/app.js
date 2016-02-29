@@ -2,10 +2,10 @@ angular.module('mvp', ['firebase', 'ui.router'])
     .constant('FIREBASE_URI', 'https://boos.firebaseio.com/')
 
     .config(function config($stateProvider){
-	$stateProvider.state('index', {
+	$stateProvider.state('info_match', {
 	    url: "",
 	    controller: "TeamCtrl as team",
-	    templateUrl: 'match.html'
+	    templateUrl: 'info_match.html'
 	})
 
 	$stateProvider.state('match', {
@@ -109,34 +109,41 @@ angular.module('mvp', ['firebase', 'ui.router'])
 	var main = this;
 	main.players = MatchService.getPlayers();
 	console.log(main.players);
+
+	// add player
 	main.addPlayer = function(numero,nom,prenom){
+
 	    MatchService.addPlayer(numero,nom,prenom);
-	    main.numero = "";
-	    main.prenom = "";
-	    main.nom = "";
+	    main.number = "";
+	    main.first_name = "";
+	    main.name = "";
 	};
 	
+	//remove player
 	main.removePlayer = function(player){
-	    console.log('remove');
+	    
 	    MatchService.removePlayer(player);
+
 	};
 
 	
     })
-    .controller('TeamCtrl', function (MatchService){
+    .controller('TeamCtrl', function ( MatchService ){
 
 	var team = this;
 	
-	team.createClub = function(club, name_team, coach){
-	    console.log('ok');
-	    MatchService.createClub(club, name_team, coach);
+	//create a new club with her name club, categorie of team and name coach 
+	team.createClub = function (club, category_team, coach){
+
+	    MatchService.createClub(club, category_team, coach);
 	};
 	
 	
     })
     .service('MatchService', function($firebaseArray, FIREBASE_URI){
+
 	var service = this;
-	service.name_team = null;	
+	service.category_team = null;	
 	service.club = null;
 	service.players = null;
 	service.refPlayers = null;
@@ -144,56 +151,98 @@ angular.module('mvp', ['firebase', 'ui.router'])
 	service.refSchema = null;
 	service.match = null;
 	service.schema = null;
-	console.log('hello');
+
 	
-	service.createClub = function(club, name_team, coach){
-	    service.name_team = name_team;	
+	service.createClub = function (club, category_team, coach) {
+
+	    //create reference with club and category_team
+	    var ref = new Firebase(FIREBASE_URI+'/boostalent/'+club+'/'+category_team);
+	    
+	    service.category_team = category_team;	
+	    
 	    service.club = club
-	    service.refPlayers = new Firebase(FIREBASE_URI+'/boostalent/'+service.club+'/'+service.name_team+'/players/');
-	    service.refMatchs = new Firebase(FIREBASE_URI+'/boostalent/'+service.club+'/'+service.name_team+'/matchs/');
+	    
+	    //reference to players of team 
+	    service.refPlayers = new Firebase(FIREBASE_URI+'/boostalent/'+service.club+'/'+service.category_team+'/players/');
+	    
+	    //reference to matchs of team 
+	    service.refMatchs = new Firebase(FIREBASE_URI+'/boostalent/'+service.club+'/'+service.category_team+'/matchs/');
+	    
+	    //create reference to schema of match
 	    service.refSchema = service.refMatchs.child('schema');
+	    
+	    //return array of schemas
 	    service.schema = $firebaseArray(service.refSchema);
+	    
+	    //return array of matchs
 	    service.match = $firebaseArray(service.refMatchs);
+	    
+	    //return array of players
 	    service.players =  $firebaseArray(service.refPlayers);
-	    var ref = new Firebase(FIREBASE_URI+'/boostalent/'+club+'/'+name_team);
-	    $firebaseArray(ref).$add({name_coach: coach});
+	    
+	    
+	    if( $firebaseArray(ref).length === 0)
+		$firebaseArray(ref).$add({name_coach: coach});
+	    
 	    return ref;
 	};
+	
+	
+	
+	service.addPlayer = function(number,name,first_name){
 
-	service.addPlayer = function(numero,nom,prenom){
-
-	    var player = {numero: numero, nom: nom, 
-			  prenom: prenom, but: 0, tir_cadre: 0,
+	    var player = {number: number, name: name, 
+			  first_name: first_name, but: 0, tir_cadre: 0,
 			  tir_non_cadre: 0, geste_defensif: 0,
 			  ballon_perdu: 0, passe_decisive: 0,
 			  avant_passe_decisive: 0};
+	    
+	    //add to player to reference player
+	    service.players.$add(player);
 
-	    $firebaseArray(service.refPlayers).$add(player);
-	    console.log(service.players);
 	};
-
+	
+	// remove player
 	service.removePlayer = function(player){
 	    
 	    service.players.$remove(player);
-	};
-	service.getPlayers = function(){
-	    return service.players;
-	};
-	
-	service.updatePlayer = function(player){
-	    service.players.$save(player);
-	}
-	service.getMatch = function(){
-	    return service.match;
+
 	};
 
-	service.addSchemaMatch = function(schema){
-	    service.schema.$add(schema);
-	}
+	// return array of player
+	service.getPlayers = function(){
+
+	    return service.players;
+
+	};
 	
+	// update player
+	service.updatePlayer = function(player){
+
+	    service.players.$save(player);
+
+	};
+
+	// return array of match
+	service.getMatch = function(){
+	    
+	    return service.match;
+
+	};
+
+	// add schema to reference schema
+	service.addSchemaMatch = function(schema){
+
+	    service.schema.$add(schema);
+
+	};
+	
+	// return array of schema
 	service.getSchema = function(){
+	    
 	    return service.schema;
-	}
+
+	};
 	
     });
 
