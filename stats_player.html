@@ -10,17 +10,14 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="player in third.players">
-          <td>{{player.numero}}</td>
-          <td>{{player.nom}}</td>
+        <tr ng-repeat="player in stat_player.players">
+          <td>{{player.number}}</td>
+          <td>{{player.name}}</td>
           <!-- <td>{{contestant.score}}</td> -->
         </tr>
       </tbody>
     </table>
   </div>
-
-
-
 
   <h3>Tableau d'analyse brut (passes)</h3>
   <div class="well">
@@ -29,14 +26,14 @@
         <tr>
           <th></th>
           <th></th>
-          <th ng-repeat="player in third.players">{{player.nom}}</th>
+          <th ng-repeat="player in stat_player.players">{{player.name}}</th>
           <th>Ballons donnés</th>
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="player in third.players">
-          <td>{{player.numero}}</td>
-          <td>{{player.nom}}</td>
+        <tr ng-repeat="player in stat_player.players">
+          <td>{{player.number}}</td>
+          <td>{{player.name}}</td>
         </tr>
       </tbody>
       <tfoot>
@@ -67,8 +64,8 @@
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="player in third.players">
-          <td>{{player.nom +" "+player.prenom}}</td>
+        <tr ng-repeat="player in stat_player.players">
+          <td>{{player.name +" "+player.first_name}}</td>
 	  <td></td>
 	  <td>{{player.ballon_perdu}}</td>
 	  <td>{{player.geste_defensif}}</td>
@@ -83,13 +80,13 @@
         <tr>
           <td><b>Total</b></td>
 	  <td></td>
-	  <td>{{third.totalStat('ballon_perdu')}}</td>
-	  <td>{{third.totalStat('geste_defensif')}}</td>
-	  <td>{{third.totalStat('tir_non_cadre')}}</td>
-	  <td>{{third.totalStat('tir_cadre')}}</td>
-	  <td>{{third.totalStat('avant_passe_decisive')}}</td>
-	  <td>{{third.totalStat('passe_decisive')}}</td>
-	  <td>{{third.totalStat('but')}}</td>
+	  <td>{{stat_player.totalStat('ballon_perdu')}}</td>
+	  <td>{{stat_player.totalStat('geste_defensif')}}</td>
+	  <td>{{stat_player.totalStat('tir_non_cadre')}}</td>
+	  <td>{{stat_player.totalStat('tir_cadre')}}</td>
+	  <td>{{stat_player.totalStat('avant_passe_decisive')}}</td>
+	  <td>{{stat_player.totalStat('passe_decisive')}}</td>
+	  <td>{{stat_player.totalStat('but')}}</td>
         </tr>
       </tfoot>
     </table>

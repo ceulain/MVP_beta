@@ -21,7 +21,7 @@ angular.module('mvp', ['firebase', 'ui.router'])
 	})
 	$stateProvider.state('stat_players',{
 	    url: "/stat_player",
-	    controller: "ThirdCtrl as third",
+	    controller: "StatPlayerCtrl as stat_player",
 	    templateUrl: 'stats_player.html'
 
 	})
@@ -29,19 +29,19 @@ angular.module('mvp', ['firebase', 'ui.router'])
     })
 
 
-    .controller('ThirdCtrl', function(MatchService){
-	var third = this;
+    .controller('StatPlayerCtrl', function(MatchService){
+	var stat_player = this;
 	
-	third.players = MatchService.getPlayers();
+	stat_player.players = MatchService.getPlayers();
 
-	third.schema = MatchService.getSchema();
-	console.log(third.schema);
+	stat_player.schema = MatchService.getSchema();
+	console.log(stat_player.schema);
 
-	third.totalStat = function(stat){
+	stat_player.totalStat = function(stat){
 	    
 	    var total = 0;
-	    for( var i = 0 , x = third.players.length; i < x; i++ ){
-		total += third.players[i][stat];
+	    for( var i = 0 , x = stat_player.players.length; i < x; i++ ){
+		total += stat_player.players[i][stat];
 	    }
 	    
 	    return total;
