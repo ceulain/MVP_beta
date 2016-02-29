@@ -33,9 +33,9 @@ angular.module('mvp', ['firebase', 'ui.router'])
 	var third = this;
 	
 	third.players = MatchService.getPlayers();
-	console.log(third.players);
-	third.schema = MatchService.getSchema();
 
+	third.schema = MatchService.getSchema();
+	console.log(third.schema);
 	third.totalStat = function(stat){
 	    var total = 0;
 	    for(var i = 0 , x = third.players.length; i < x; i++){
@@ -66,23 +66,30 @@ angular.module('mvp', ['firebase', 'ui.router'])
 	    
 	};
 	
-	second.setCurrentStat = function(stat){
+	second.setCurrentStat = function( stat ){
+
+
 	    second.schema.push(stat);
-	    if(stat === 'but' && second.schema.length >= 4){
-		second.schema[second.schema.length-3].passe_decisive++;
-		second.schema[second.schema.length-4].avant_passe_decisive++;
-		MatchService.updatePlayer(second.schema[second.schema.length-3]);
-		MatchService.updatePlayer(second.schema[second.schema.length-4]);
+	    var lengthSchema = second.schema.length;
+
+	    if( stat === 'but' && lengthSchema >= 4 ){
+		
+		second.schema[lengthSchema-3].passe_decisive++;
+		second.schema[lengthSchema-4].avant_passe_decisive++;
+		MatchService.updatePlayer(second.schema[lengthSchema-3]);
+		MatchService.updatePlayer(second.schema[lengthSchema-4]);
 	    }
 	    
-	    if(stat === 'but' && second.schema.length === 3){
+	    if( stat === 'but' && lengthSchema === 3 ){
 		console.log('3');
-		second.schema[second.schema.length-3].passe_decisive++;
-		MatchService.updatePlayer(second.schema[second.schema.length-3]);
+		second.schema[lengthSchema-3].passe_decisive++;
+		MatchService.updatePlayer(second.schema[lengthSchema-3]);
 	    }
-	    console.log(second.schema[second.schema.length-1]);
-	    second.schema[second.schema.length-2][stat]++;
-	    MatchService.updatePlayer(second.schema[second.schema.length-2]);
+
+
+	    console.log(second.schema[lengthSchema-1]);
+	    second.schema[lengthSchema-2][stat]++;
+	    MatchService.updatePlayer(second.schema[lengthSchema-2]);
 	    second.schemaMatch.push(second.schema);
 	    console.log(second.schemaMatch);
 	    second.schema = [];
@@ -153,12 +160,14 @@ angular.module('mvp', ['firebase', 'ui.router'])
 	};
 
 	service.addPlayer = function(numero,nom,prenom){
-	    // var ref = new Firebase(FIREBASE_URI+'/boostalent/'+service.club+'/'+service.name_team+'/players/');
-	    $firebaseArray(service.refPlayers).$add({numero: numero, nom: nom, 
-						     prenom: prenom, but: 0, tir_cadre: 0,
-						     tir_non_cadre: 0, geste_defensif: 0,
-						     ballon_perdu: 0, passe_decisive: 0,
-						     avant_passe_decisive: 0});
+
+	    var player = {numero: numero, nom: nom, 
+			  prenom: prenom, but: 0, tir_cadre: 0,
+			  tir_non_cadre: 0, geste_defensif: 0,
+			  ballon_perdu: 0, passe_decisive: 0,
+			  avant_passe_decisive: 0};
+
+	    $firebaseArray(service.refPlayers).$add(player);
 	    console.log(service.players);
 	};
 
