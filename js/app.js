@@ -71,21 +71,23 @@ angular.module('mvp', ['firebase', 'ui.router'])
 	    	    
 	};
 	
-	stat.setCurrentStat = function (stat) {
+	stat.setCurrentStat = function (statistic) {
 	    
 	    //add stat(but, tir cadre, tir non cadre, geste defensif, ballon perdu)
 	    // to state schema
 	    // use in file stat.html
 	    //
-	    stat.schema.push(stat);
+	    stat.schema.push(statistic);
 	    
 	    var lengthSchema = stat.schema.length;
+	    
+
 
 	    //if size of schema > 4, count passeur decisive and avant passeur decisive
 	    //increase of 1
 	    //stat.schema contains is an array of player
-	    if( stat === 'but' && lengthSchema >= 4 ){
-		
+	    if( statistic === 'but' && lengthSchema >= 4 ){
+	
 		
 		stat.schema[lengthSchema-3].passe_decisive++;
 		stat.schema[lengthSchema-4].avant_passe_decisive++;
@@ -93,7 +95,7 @@ angular.module('mvp', ['firebase', 'ui.router'])
 		MatchService.updatePlayer(stat.schema[lengthSchema-4]);
 	    }
 	    
-	    if( stat === 'but' && lengthSchema === 3 ){
+	    if( statistic === 'but' && lengthSchema === 3 ){
 		console.log('3');
 		stat.schema[lengthSchema-3].passe_decisive++;
 		MatchService.updatePlayer(stat.schema[lengthSchema-3]);
@@ -102,7 +104,7 @@ angular.module('mvp', ['firebase', 'ui.router'])
 
 	    console.log(stat.schema[lengthSchema-1]);
 	    //augmente la stat du joueur qu'il a effectué 
-	    stat.schema[lengthSchema-2][stat]++;
+	    stat.schema[lengthSchema-2][statistic]++;
 	    
 	    MatchService.updatePlayer(stat.schema[lengthSchema-2]);
 	    
@@ -195,8 +197,8 @@ angular.module('mvp', ['firebase', 'ui.router'])
 	    //return array of players
 	    service.players =  $firebaseArray(service.refPlayers);
 	    
-	    
-	    if( $firebaseArray(ref).length === 0)
+	    // console.log($firebaseArray(ref));
+	    if( $firebaseArray(ref)[0] !== 'undefined')
 		$firebaseArray(ref).$add({name_coach: coach});
 	    
 	    return ref;
