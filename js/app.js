@@ -10,12 +10,12 @@ angular.module('mvp', ['firebase', 'ui.router'])
 
 	$stateProvider.state('players', {
 	    url: "/players",
-	    controller: "PlayersCtrl as main",
+	    controller: "PlayersCtrl as players",
 	    templateUrl : 'players.html'
 	})
 	$stateProvider.state('stat',{
 	    url: "/stat",
-	    controller: "MainCtrl as second",
+	    controller: "StatCtrl as stat",
 	    templateUrl: 'stat.html'
 
 	})
@@ -52,51 +52,66 @@ angular.module('mvp', ['firebase', 'ui.router'])
 
 
 
-    .controller('SecondCtrl', function(MatchService){
-	var second = this;
+    .controller('StatCtrl', function(MatchService){
+	var stat = this;
 	
-	second.schemaMatch = [];
-	second.schema = [];
+	stat.schemaMatch = [];
+	stat.schema = [];
 	
-	second.players = MatchService.getPlayers();
+	stat.players = MatchService.getPlayers();
 
-	second.statCount = function(player) {
-	    second.schema.push(player);
-	    console.log(second.schema);
-	    
-	    
+	
+	//add player to stat.schema
+	//use in file stat.html
+	// <a ng-repeat="player in stat.players"  class="btn btn-default" ng-click="stat.statCount(player)">{{player.first_name+ " " + player.name}}</a> 
+	stat.statCount = function(player) {
+
+	    stat.schema.push(player);
+	    console.log(stat.schema);
+	    	    
 	};
 	
-	second.setCurrentStat = function( stat ){
+	stat.setCurrentStat = function (stat) {
+	    
+	    //add stat(but, tir cadre, tir non cadre, geste defensif, ballon perdu)
+	    // to state schema
+	    // use in file stat.html
+	    //
+	    stat.schema.push(stat);
+	    
+	    var lengthSchema = stat.schema.length;
 
-
-	    second.schema.push(stat);
-	    var lengthSchema = second.schema.length;
-
+	    //if size of schema > 4, count passeur decisive and avant passeur decisive
+	    //increase of 1
+	    //stat.schema contains is an array of player
 	    if( stat === 'but' && lengthSchema >= 4 ){
 		
-		second.schema[lengthSchema-3].passe_decisive++;
-		second.schema[lengthSchema-4].avant_passe_decisive++;
-		MatchService.updatePlayer(second.schema[lengthSchema-3]);
-		MatchService.updatePlayer(second.schema[lengthSchema-4]);
+		
+		stat.schema[lengthSchema-3].passe_decisive++;
+		stat.schema[lengthSchema-4].avant_passe_decisive++;
+		MatchService.updatePlayer(stat.schema[lengthSchema-3]);
+		MatchService.updatePlayer(stat.schema[lengthSchema-4]);
 	    }
 	    
 	    if( stat === 'but' && lengthSchema === 3 ){
 		console.log('3');
-		second.schema[lengthSchema-3].passe_decisive++;
-		MatchService.updatePlayer(second.schema[lengthSchema-3]);
+		stat.schema[lengthSchema-3].passe_decisive++;
+		MatchService.updatePlayer(stat.schema[lengthSchema-3]);
 	    }
 
 
-	    console.log(second.schema[lengthSchema-1]);
-	    second.schema[lengthSchema-2][stat]++;
-	    MatchService.updatePlayer(second.schema[lengthSchema-2]);
-	    second.schemaMatch.push(second.schema);
-	    console.log(second.schemaMatch);
-	    second.schema = [];
+	    console.log(stat.schema[lengthSchema-1]);
+	    //augmente la stat du joueur qu'il a effectué 
+	    stat.schema[lengthSchema-2][stat]++;
+	    
+	    MatchService.updatePlayer(stat.schema[lengthSchema-2]);
+	    
+	    stat.schemaMatch.push(stat.schema);
+	    //console.log(stat.schemaMatch);
+	    stat.schema = [];
 	};
 
-	second.addSchema = function(schema){
+	stat.addSchema = function(schema){
 	    console.log(schema);
 	    MatchService.addSchemaMatch(schema);
 	};

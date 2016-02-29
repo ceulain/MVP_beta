@@ -1,22 +1,22 @@
-<div class="container" ng-controller="SecondCtrl as second"> 
+<div class="container"> 
   <div class="row" style="margin-top: 30px">
 
     <div class="col-md-12"> 
-      <a class="btn btn-default" ng-click="second.setCurrentStat('but')">But</a>
+      <a class="btn btn-default" ng-click="stat.setCurrentStat('but')">But</a>
 
-      <a class="btn btn-default" ng-click="second.setCurrentStat('tir_cadre')">Tir cadré</a>
-      <a class="btn btn-default" ng-click="second.setCurrentStat('tir_non_cadre')">Tir non cadré</a>
+      <a class="btn btn-default" ng-click="stat.setCurrentStat('tir_cadre')">Tir cadré</a>
+      <a class="btn btn-default" ng-click="stat.setCurrentStat('tir_non_cadre')">Tir non cadré</a>
 
-      <a class="btn btn-default" ng-click="second.setCurrentStat('geste_defensif')">Geste défensif</a>
+      <a class="btn btn-default" ng-click="stat.setCurrentStat('geste_defensif')">Geste défensif</a>
 
-      <a class="btn btn-default" ng-click="second.setCurrentStat('ballon_perdu')">Ballon Perdu</a>
+      <a class="btn btn-default" ng-click="stat.setCurrentStat('ballon_perdu')">Ballon Perdu</a>
     </div>
 
     <div class="col-md-12">
-      <a ng-repeat="player in second.players"  class="btn btn-default" ng-click="second.statCount(player)">{{player.prenom + " " + player.nom}}</a> 
+      <a ng-repeat="player in stat.players"  class="btn btn-default" ng-click="stat.statCount(player)">{{player.first_name+ " " + player.name}}</a> 
     </div>
 
-    <a class="btn btn-info" ui-sref="stat_players" style="margin-left: 30px; margin-top: 30px;" ng-click="second.addSchema(second.schemaMatch)">Voir les stats du match</a>
+    <a class="btn btn-info" ui-sref="stat_players" style="margin-left: 30px; margin-top: 30px;" ng-click="stat.addSchema(stat.schemaMatch)">Voir les stats du match</a>
     
   </div>
 
