@@ -46,7 +46,7 @@ angular.module('mvp', ['firebase', 'ui.router'])
 	    
 	    return total;
 	}
-
+	
     })
 
 
