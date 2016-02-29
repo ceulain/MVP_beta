@@ -4,13 +4,13 @@ angular.module('mvp', ['firebase', 'ui.router'])
     .config(function config($stateProvider){
 	$stateProvider.state('info_match', {
 	    url: "",
-	    controller: "TeamCtrl as team",
+	    controller: "InfoMatchCtrl as team",
 	    templateUrl: 'info_match.html'
 	})
 
-	$stateProvider.state('match', {
-	    url: "/match",
-	    controller: "MainCtrl as main",
+	$stateProvider.state('players', {
+	    url: "/players",
+	    controller: "PlayersCtrl as main",
 	    templateUrl : 'players.html'
 	})
 	$stateProvider.state('stat',{
@@ -105,7 +105,7 @@ angular.module('mvp', ['firebase', 'ui.router'])
 
 	
     })
-    .controller('MainCtrl', function(MatchService){
+    .controller('PlayersCtrl', function(MatchService){
 	var main = this;
 	main.players = MatchService.getPlayers();
 	console.log(main.players);
@@ -128,7 +128,7 @@ angular.module('mvp', ['firebase', 'ui.router'])
 
 	
     })
-    .controller('TeamCtrl', function ( MatchService ){
+    .controller('InfoMatchCtrl', function ( MatchService ){
 
 	var team = this;
 	
