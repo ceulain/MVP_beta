@@ -1,7 +1,7 @@
-<div class="col-xs-6"  ng-controller="TeamCtrl as team">
+<div class="col-xs-6">
   <div class="well">
     <h3>Infos match & club</h3>
-    <form class="form" role="form" novalidate ng-submit="team.createClub(team.club, team.team, team.name_coach)">
+    <form class="form" role="form" novalidate ng-submit="team.createClub(team.club, team.category_team, team.name_coach)">
       <div class="form-group">
         <input type="text" class="form-control" ng-model="team.club" placeholder="Nom du Club">
       </div>
@@ -9,11 +9,11 @@
         <input type="text" class="form-control" ng-model="team.name_coach" placeholder="Nom du Coach">
       </div>
       <div class="form-group">
-        <input type="text" class="form-control" ng-model="team.team" placeholder="Catégorie de l'équipe">
+        <input type="text" class="form-control" ng-model="team.category_team" placeholder="Catégorie de l'équipe">
       </div>
 
       <button type="submit" class="btn btn-default">Valider</button>
-      <button  class="btn btn-default"><a ui-sref="match">Etape suivante</a></button>
+      <button  class="btn btn-default"><a ui-sref="players">Etape suivante</a></button>
     </form>
   </div>
 </div>   
