@@ -32,6 +32,7 @@
       </thead>
       <tbody>
         <tr ng-repeat="player in stat_player.players">
+          <td>{{player.number}}</td>
           <td>{{player.name}}</td>
 
         </tr>
@@ -53,10 +54,16 @@
       <thead>
         <tr>
           <th></th>
+          <th></th>
+          <!-- CREER UN COMPTEUR? -->
           <th>Min</th>
+          <th>Ballons joués</th>
           <th>Ballons perdus</th>
+          <th>% de passes réussies</th>
+          <th>Ballons récupérés</th>
           <th>Geste Défensif</th>
-          <th>Tir Non Cadré</th>
+          <th>% de relance</th>
+          <th>Tir</th>
           <th>Tir Cadré</th>
           <th>Passe Décisive</th>
           <th>Avant Passe Décisive</th>
@@ -65,28 +72,42 @@
       </thead>
       <tbody>
         <tr ng-repeat="player in stat_player.players">
+          {{$index}}
+          <td>{{player.number}}</td>
           <td>{{player.name +" "+player.first_name}}</td>
-	  <td></td>
-	  <td>{{player.ballon_perdu}}</td>
-	  <td>{{player.geste_defensif}}</td>
-	  <td>{{player.tir_non_cadre}}</td>
-	  <td>{{player.tir_cadre}}</td>
-	  <td>{{player.avant_passe_decisive}}</td>
-	  <td>{{player.passe_decisive}}</td>
-	  <td>{{player.but}}</td>
+
+          <!-- CREER UN COMPTEUR? -->
+          <td>nb min jouées</td>
+
+          <td>{{player.ballon_joues}}</td>
+          <td>{{player.ballon_perdu}}</td>
+          <td>{{stat_player.percent_pass(player)}}</td>
+          <td>{{player.ballon_recup}}</td>
+          <td>{{player.geste_defensif}}</td>
+          <td>{{stat_player.percent(player)}}</td>        
+          <td>{{stat_player.tirs(player)}}</td>
+          <td>{{player.tir_cadre}}</td>
+          <td>{{player.avant_passe_decisive}}</td>
+          <td>{{player.passe_decisive}}</td>
+          <td>{{player.but}}</td>
         </tr>
       </tbody>
       <tfoot>
         <tr>
+          <td></td>
           <td><b>Total</b></td>
-	  <td></td>
-	  <td>{{stat_player.totalStat('ballon_perdu')}}</td>
-	  <td>{{stat_player.totalStat('geste_defensif')}}</td>
-	  <td>{{stat_player.totalStat('tir_non_cadre')}}</td>
-	  <td>{{stat_player.totalStat('tir_cadre')}}</td>
-	  <td>{{stat_player.totalStat('avant_passe_decisive')}}</td>
-	  <td>{{stat_player.totalStat('passe_decisive')}}</td>
-	  <td>{{stat_player.totalStat('but')}}</td>
+          <td><!-- QUEL EST L INTERET D UN NB DE MIN ADDITIONNEES? --></td>
+          <td>{{stat_player.totalStat('ballon_joues')}}</td>
+          <td>{{stat_player.totalStat('ballon_perdu')}}</td>
+          <td>{{stat_player.avgRelance('percent_pass')}}</td>
+          <td>{{stat_player.totalStat('ballon_recup')}}</td>
+          <td>{{stat_player.totalStat('geste_defensif')}}</td>
+          <td>{{stat_player.avgRelance('pourc_relance')}}</td>
+          <td>{{stat_player.totalStat('tirs')}}</td>
+          <td>{{stat_player.totalStat('tir_cadre')}}</td>
+          <td>{{stat_player.totalStat('avant_passe_decisive')}}</td>
+          <td>{{stat_player.totalStat('passe_decisive')}}</td>
+          <td>{{stat_player.totalStat('but')}}</td>
         </tr>
       </tfoot>
     </table>
