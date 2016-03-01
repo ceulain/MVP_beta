@@ -20,28 +20,28 @@
   </div>
 
   <h3>Tableau d'analyse brut (passes)</h3>
+ 
   <div class="well">
-    <table class="table">
+    <table class="table" id="table_pass">
       <thead>
         <tr>
-          <th></th>
           <th></th>
           <th ng-repeat="player in stat_player.players">{{player.name}}</th>
           <th>Ballons donnés</th>
         </tr>
       </thead>
       <tbody>
-        <tr ng-repeat="player in stat_player.players">
+        <tr ng-repeat="player in stat_player.players" id="{{player.name+'_'+player.first_name}}">
           <td>{{player.name}}</td>
-
+	  <td ng-repeat="player in stat_player.players" id="{{player.name+'_'+player.first_name}}"></td>
+	  <td>{{stat_player.countBallReceive(player)}}</td>
         </tr>
       </tbody>
       <tfoot>
         <tr>
-          <td></td>
           <td><b>Ballons reçus</b></td>
-          
-
+	  <td ng-repeat="player in stat_player.players"></td>
+	  <td>{{stat_player.totalPass()}}</td>
         </tr>
       </tfoot>
     </table>

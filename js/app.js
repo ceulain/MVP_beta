@@ -47,6 +47,102 @@ angular.module('mvp', ['firebase', 'ui.router'])
 	    return total;
 	}
 	
+	stat_player.passTo = function(passer, receiver){
+	    var selection = "tr#"+passer+ " td#"+receiver;
+	    var passe = $(selection).text();
+	    passe++;   
+	    $(selection).text(''+passe);
+	    
+	};
+
+	
+	var calculateColumn = function(index){
+	    var total = 0;
+	    $('#table_pass tbody tr').each(function(){
+		
+		var value = parseInt($('td', this).eq(index).text(), 10);
+
+		if (!isNaN(value)){
+		    total += value;
+		}
+	    });
+
+	    $('#table_pass tfoot td').eq(index).text(total);
+	};
+
+	stat_player.totalPass = function(){
+	    var tr = $('#table_pass tfoot tr');
+	    var nbrTd = tr.children().size();
+	    console.log('nbrTd : '+nbrTd);
+	    var total = 0
+	    for(var i = 1; i < nbrTd-1; i++){
+		var value = parseInt(tr.children().eq(i).text(), 10);
+		console.log(tr.children().eq(i).text());
+		total += value;
+	    }
+	    
+	    return total;
+	    
+	    
+	};
+
+	stat_player.totalBall = function(){
+	    
+	    var numberTh = $('#table_pass thead th').size();
+	    for(var i = 1; i < numberTh-1; i++){
+		calculateColumn(i);
+	    }
+
+	};
+	
+	stat_player.countBallReceive = function(player){
+
+	    var selectionTr = 'tr#'+player.name+'_'+player.first_name;
+	    var nbChild = $(selectionTr).children().size();
+	    var total = 0;
+	    
+	    for(var i = 1; i < nbChild-1; i++){
+		
+		var valTd = $(selectionTr).children().eq(i).text();
+		var valTdInt = parseInt(valTd, 10);
+		
+		if(!isNaN(valTdInt)){
+		    total += valTdInt;
+		}
+		
+	    }
+	    $(selectionTr).children().eq(nbChild-1).text(total);
+
+	};
+
+	stat_player.countPass = function(){
+
+	    for(var i = 0, x = stat_player.schema.length; i < x; i++){
+		var schema = stat_player.schema[i];
+		console.log(schema);
+
+		for(var j = 0, y = schema.length; j < y; j++){
+		    console.log(schema[j].length);
+		    var path = schema[j];
+
+		    for(var k= 0, z = path.length-2; k < z; k++){
+			stat_player.passTo(path[k].name+'_'+path[k].first_name, path[k+1].name+'_'+path[k+1].first_name);
+			console.log( path[k].name+''+path[k].first_name+ ' a fait un passs à '+ path[k+1].name+' '+path[k+1].first_name );
+
+		    }
+
+		}
+		
+	    }
+
+	};
+
+	
+	
+	
+	stat_player.countPass();
+	stat_player.totalBall()
+	
     })
 
 
@@ -66,9 +162,10 @@ angular.module('mvp', ['firebase', 'ui.router'])
 	// <a ng-repeat="player in stat.players"  class="btn btn-default" ng-click="stat.statCount(player)">{{player.first_name+ " " + player.name}}</a> 
 	stat.statCount = function(player) {
 
+	    
 	    stat.schema.push(player);
 	    console.log(stat.schema);
-	    	    
+	    
 	};
 	
 	stat.setCurrentStat = function (statistic) {
@@ -79,6 +176,7 @@ angular.module('mvp', ['firebase', 'ui.router'])
 	    //
 	    stat.schema.push(statistic);
 	    
+	    
 	    var lengthSchema = stat.schema.length;
 	    
 
@@ -87,7 +185,7 @@ angular.module('mvp', ['firebase', 'ui.router'])
 	    //increase of 1
 	    //stat.schema contains is an array of player
 	    if( statistic === 'but' && lengthSchema >= 4 ){
-	
+		
 		
 		stat.schema[lengthSchema-3].passe_decisive++;
 		stat.schema[lengthSchema-4].avant_passe_decisive++;
@@ -114,9 +212,12 @@ angular.module('mvp', ['firebase', 'ui.router'])
 	};
 
 	stat.addSchema = function(schema){
-	    console.log(schema);
+
+	    console.log("stat players: "+JSON.stringify(stat.players));
+	    console.log(schema[0]);
 	    MatchService.addSchemaMatch(schema);
-	};
+	    
+ 	};
 
 
 
@@ -197,9 +298,11 @@ angular.module('mvp', ['firebase', 'ui.router'])
 	    //return array of players
 	    service.players =  $firebaseArray(service.refPlayers);
 	    
+	    
 	    // console.log($firebaseArray(ref));
-	    if( $firebaseArray(ref)[0] !== 'undefined')
-		$firebaseArray(ref).$add({name_coach: coach});
+	    //  console.log($firebaseArray(ref)[0].name_coach);
+	    // if( $firebaseArray(ref)[0] !== 'undefined')
+	    $firebaseArray(ref).$add({name_coach: coach});
 	    
 	    return ref;
 	};
@@ -253,6 +356,13 @@ angular.module('mvp', ['firebase', 'ui.router'])
 	    service.schema.$add(schema);
 
 	};
+
+	service.getSchemaMatch = function(schema){
+
+	    return service.schema.$add(schema);
+
+	};
+
 	
 	// return array of schema
 	service.getSchema = function(){
