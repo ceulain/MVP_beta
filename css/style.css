@@ -8,6 +8,23 @@
 	box-shadow: none;
 }
 
+#btn-stat a{
+
+
+}
+
+#div_player{
+    margin-top: 20px;
+}
+#player_button{
+    width: 25%;
+    height: 20vh;
+}
+
+#div_player a{
+
+    line-height: 20vh;
+}
 .edit input[type=text]:hover,
 .edit input[type=text]:focus {
 	border: 1px solid #d7cebf;

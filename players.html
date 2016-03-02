@@ -35,9 +35,9 @@
       </thead>
       <tbody>
 	<tr ng-repeat="player in players.players">
-          <td><input type="text" ng-model="player.number"/>{{players.number}}</td>
-	  <td><input type="text" ng-model="player.name"/>{{players.name}}</td>
-          <td><input type="text" ng-model="player.first_name"/>{{players.first_name}}</td>
+          <td><input type="text" ng-model="player.number"/></td>
+	  <td><input type="text" ng-model="player.name"/></td>
+          <td><input type="text" ng-model="player.first_name"/></td>
           <td>
             <button type="button" class="btn btn-link" ng-click="players.removePlayer(player)">Remove</button>
           </td>
