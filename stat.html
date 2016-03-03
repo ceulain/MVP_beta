@@ -9,17 +9,37 @@
 
       <a class="btn btn-default" ng-click="stat.setCurrentStat('geste_defensif')">Geste défensif</a>
 
+      
       <a class="btn btn-default" ng-click="stat.setCurrentStat('ballon_perdu')">Ballon Perdu</a>
+      <a class="btn btn-info" ui-sref="stat_players" style="margin-left: 30px; margin-top: 30px;" ng-click="stat.addSchema(stat.schemaMatch)">Voir les stats du match</a>
     </div>
+    <div class="col-md-12 text-center" id="div_player">
+      
+      <div class="row">
+	<a ng-repeat="player in stat.players"  ng-if="player.position === 'GD'" id="player_button" class="btn btn-default" ng-click="stat.statCount(player)">{{player.first_name+ " " + player.name}}</a> 
+      </div>
+      <div class="row">
+	<a ng-repeat="player in stat.players" ng-if="player.position === 'ARG'" id="player_button" class="btn btn-default" ng-click="stat.statCount(player)">{{player.first_name+ " " + player.name}} {{player.position}}</a> 
+	<a ng-repeat="player in stat.players" ng-if="player.position === 'DFG'" id="player_button" class="btn btn-default" ng-click="stat.statCount(player)">{{player.first_name+ " " + player.name}} {{player.position}}</a> 
+	<a ng-repeat="player in stat.players" ng-if="player.position === 'DFD'" id="player_button" class="btn btn-default" ng-click="stat.statCount(player)">{{player.first_name+ " " + player.name}} {{player.position}}</a> 
+	<a ng-repeat="player in stat.players" ng-if="player.position === 'ARD'" id="player_button" class="btn btn-default" ng-click="stat.statCount(player)">{{player.first_name+ " " + player.name}} {{player.position}}</a> 
+      </div>
 
-    <div class="col-md-12" id="div_player">
-      <a ng-repeat="player in stat.players"  id="player_button" class="btn btn-default" ng-click="stat.statCount(player)">{{player.first_name+ " " + player.name}}</a> 
-    </div>
+      <div class="row">
+      	<a ng-repeat="player in stat.players"  ng-if="player.position === 'MG'" id="player_button" class="btn btn-default" ng-click="stat.statCount(player)">{{player.first_name+ " " + player.name}} {{player.position}}</a>
+	<a ng-repeat="player in stat.players"  ng-if="player.position === 'MCG'" id="player_button" class="btn btn-default" ng-click="stat.statCount(player)">{{player.first_name+ " " + player.name}} {{player.position}}</a>
+      	<a ng-repeat="player in stat.players"  ng-if="player.position === 'MCD'" id="player_button" class="btn btn-default" ng-click="stat.statCount(player)">{{player.first_name+ " " + player.name}} {{player.position}}</a>
+      	<a ng-repeat="player in stat.players"  ng-if="player.position ===  'MD'" id="player_button" class="btn btn-default" ng-click="stat.statCount(player)">{{player.first_name+ " " + player.name}} {{player.position}}</a>
+      </div>
 
-    <a class="btn btn-info" ui-sref="stat_players" style="margin-left: 30px; margin-top: 30px;" ng-click="stat.addSchema(stat.schemaMatch)">Voir les stats du match</a>
-    
+      <div class="row">
+      	<a ng-repeat="player in stat.players"  ng-if="player.position === 'ATG'" id="player_button" class="btn btn-default" ng-click="stat.statCount(player)">{{player.first_name+ " " + player.name}} {{player.position}}</a>
+      	<a ng-repeat="player in stat.players"  ng-if="player.position === 'ATD'" id="player_button" class="btn btn-default" ng-click="stat.statCount(player)">{{player.first_name+ " " + player.name}} {{player.position}}</a>
+      </div>
+      
+    </div>  
   </div>
-
+  
 </div>
 
 

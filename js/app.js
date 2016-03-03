@@ -274,12 +274,14 @@ angular.module('mvp', ['firebase', 'ui.router'])
 	console.log(main.players);
 
 	// add player
-	main.addPlayer = function(numero,nom,prenom){
+	main.addPlayer = function(numero,nom,prenom, position){
 
-	    MatchService.addPlayer(numero,nom,prenom);
+	    MatchService.addPlayer(numero,nom,prenom, position);
 	    main.number = "";
 	    main.first_name = "";
 	    main.name = "";
+	    main.position = "";
+	    
 	};
 	
 	//remove player
@@ -351,15 +353,16 @@ angular.module('mvp', ['firebase', 'ui.router'])
 	
 	
 	
-	service.addPlayer = function(number,name,first_name){
+	service.addPlayer = function(number,name,first_name, position){
 
-	    var player = {number: number, name: name, 
+	    var player = {number: number, name: name, position: position, 
 			  first_name: first_name, but: 0, tir_cadre: 0,
 			  tir_non_cadre: 0, geste_defensif: 0,
 			  ballon_perdu: 0, passe_decisive: 0,
 			  avant_passe_decisive: 0, ballon_joues: 0, ballon_recup: 0,
 			  pourc_relance: 0, 
-			  pourc_pass: 0, tirs: 0, percent_pass: 0,};
+			  pourc_pass: 0, tirs: 0, percent_pass: 0, 
+			  };
 
 	    //add to player to reference player
 	    service.players.$add(player);
