@@ -33,6 +33,7 @@ angular.module('mvp', ['firebase', 'ui.router'])
     .controller('StatPlayerCtrl', function(MatchService){
 	var stat_player = this;
 	
+
 	stat_player.players = MatchService.getPlayers();
 
 	stat_player.schema = MatchService.getSchema();
@@ -194,7 +195,7 @@ angular.module('mvp', ['firebase', 'ui.router'])
 
 	stat.schemaMatch = [];
 	stat.schema = [];
-
+	stat.flag = 0;
 	stat.players = MatchService.getPlayers();
 
 
@@ -205,17 +206,32 @@ angular.module('mvp', ['firebase', 'ui.router'])
 	    MatchService.addSchemaMatch(schema);
 	    
  	};
-
+	
+	stat.playerDrag = function(){
+	    stat.flag = 0;
+	   $('[id=player_button]').draggable();
+	    
+	};
+	  
 
 	//add player to stat.schema
 	//use in file stat.html
 	// <a ng-repeat="player in stat.players"  class="btn btn-default" ng-click="stat.statCount(player)">{{player.first_name+ " " + player.name}}</a> 
 	stat.statCount = function(player) {
-	    player.ballon_joues++;
-	    MatchService.updatePlayer(player);
-	    stat.schema.push(player);
-	    console.log(stat.schema);
+	  
+	 
 
+	    
+	    
+	    console.log(stat.flag);
+	    if(stat.flag === 0){
+		console.log('click');
+		player.ballon_joues++;
+		MatchService.updatePlayer(player);
+		stat.schema.push(player);
+		console.log(stat.schema);
+		
+	    }
 
 	};
 

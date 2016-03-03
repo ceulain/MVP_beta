@@ -1,4 +1,5 @@
-<div class="container"> 
+<div class="container">
+
   <div class="row" style="margin-top: 30px">
 
     <div class="col-md-12" id="btn-stat"> 
@@ -16,25 +17,33 @@
     <div class="col-md-12 text-center" id="div_player">
       
       <div class="row">
-	<a ng-repeat="player in stat.players"  ng-if="player.position === 'GD'" id="player_button" class="btn btn-default" ng-click="stat.statCount(player)">{{player.first_name+ " " + player.name}}</a> 
+	<a ng-repeat="player in stat.players" ng-mousedown="stat.playerDrag()" ng-mousemove="stat.flag = 1" ng-mouseup="stat.statCount(player)" ng-if="player.position === 'GD'" id="player_button" class="btn btn-default" >{{player.first_name+ " " + player.name}}</a> 
       </div>
       <div class="row">
-	<a ng-repeat="player in stat.players" ng-if="player.position === 'ARG'" id="player_button" class="btn btn-default" ng-click="stat.statCount(player)">{{player.first_name+ " " + player.name}} {{player.position}}</a> 
-	<a ng-repeat="player in stat.players" ng-if="player.position === 'DFG'" id="player_button" class="btn btn-default" ng-click="stat.statCount(player)">{{player.first_name+ " " + player.name}} {{player.position}}</a> 
-	<a ng-repeat="player in stat.players" ng-if="player.position === 'DFD'" id="player_button" class="btn btn-default" ng-click="stat.statCount(player)">{{player.first_name+ " " + player.name}} {{player.position}}</a> 
-	<a ng-repeat="player in stat.players" ng-if="player.position === 'ARD'" id="player_button" class="btn btn-default" ng-click="stat.statCount(player)">{{player.first_name+ " " + player.name}} {{player.position}}</a> 
+	<a ng-repeat="player in stat.players" ng-if="player.position === 'ARG'" id="player_button" class="btn btn-default" ng-mousedown="stat.playerDrag()" ng-mousemove="stat.flag = 1" ng-mouseup="stat.statCount(player)">{{player.first_name+ " " + player.name}} {{player.position}}</a> 
+
+	<a ng-repeat="player in stat.players" ng-if="player.position === 'DFG'" id="player_button" class="btn btn-default" ng-mousedown="stat.playerDrag()" ng-mousemove="stat.flag = 1" ng-mouseup="stat.statCount(player)">{{player.first_name+ " " + player.name}} {{player.position}}</a> 
+
+	<a ng-repeat="player in stat.players" ng-if="player.position === 'DFD'" id="player_button" class="btn btn-default" ng-mousedown="stat.playerDrag()" ng-mousemove="stat.flag = 1" ng-mouseup="stat.statCount(player)">{{player.first_name+ " " + player.name}} {{player.position}}</a> 
+
+	<a ng-repeat="player in stat.players" ng-if="player.position === 'ARD'" id="player_button" class="btn btn-default" ng-mousedown="stat.playerDrag()" ng-mousemove="stat.flag = 1" ng-mouseup="stat.statCount(player)">{{player.first_name+ " " + player.name}} {{player.position}}</a> 
+
       </div>
 
       <div class="row">
-      	<a ng-repeat="player in stat.players"  ng-if="player.position === 'MG'" id="player_button" class="btn btn-default" ng-click="stat.statCount(player)">{{player.first_name+ " " + player.name}} {{player.position}}</a>
-	<a ng-repeat="player in stat.players"  ng-if="player.position === 'MCG'" id="player_button" class="btn btn-default" ng-click="stat.statCount(player)">{{player.first_name+ " " + player.name}} {{player.position}}</a>
-      	<a ng-repeat="player in stat.players"  ng-if="player.position === 'MCD'" id="player_button" class="btn btn-default" ng-click="stat.statCount(player)">{{player.first_name+ " " + player.name}} {{player.position}}</a>
-      	<a ng-repeat="player in stat.players"  ng-if="player.position ===  'MD'" id="player_button" class="btn btn-default" ng-click="stat.statCount(player)">{{player.first_name+ " " + player.name}} {{player.position}}</a>
+      	<a ng-repeat="player in stat.players"  ng-if="player.position === 'MG'" id="player_button" class="btn btn-default" ng-mousedown="stat.playerDrag()" ng-mousemove="stat.flag = 1" ng-mouseup="stat.statCount(player)">{{player.first_name+ " " + player.name}} {{player.position}}</a>
+
+	<a ng-repeat="player in stat.players"  ng-if="player.position === 'MCG'" id="player_button" class="btn btn-default" ng-mousedown="stat.playerDrag()" ng-mousemove="stat.flag = 1" ng-mouseup="stat.statCount(player)">{{player.first_name+ " " + player.name}} {{player.position}}</a>
+
+      	<a ng-repeat="player in stat.players"  ng-if="player.position === 'MCD'" id="player_button" class="btn btn-default" ng-mousedown="stat.playerDrag()" ng-mousemove="stat.flag = 1" ng-mouseup="stat.statCount(player)">{{player.first_name+ " " + player.name}} {{player.position}}</a>
+
+      	<a ng-repeat="player in stat.players"  ng-if="player.position ===  'MD'" id="player_button" class="btn btn-default" ng-mousedown="stat.playerDrag()" ng-mousemove="stat.flag = 1" ng-mouseup="stat.statCount(player)">{{player.first_name+ " " + player.name}} {{player.position}}</a>
       </div>
 
       <div class="row">
-      	<a ng-repeat="player in stat.players"  ng-if="player.position === 'ATG'" id="player_button" class="btn btn-default" ng-click="stat.statCount(player)">{{player.first_name+ " " + player.name}} {{player.position}}</a>
-      	<a ng-repeat="player in stat.players"  ng-if="player.position === 'ATD'" id="player_button" class="btn btn-default" ng-click="stat.statCount(player)">{{player.first_name+ " " + player.name}} {{player.position}}</a>
+      	<a ng-repeat="player in stat.players"  ng-if="player.position === 'ATG'" id="player_button" class="btn btn-default" ng-mousedown="stat.playerDrag()" ng-mousemove="stat.flag = 1" ng-mouseup="stat.statCount(player)">{{player.first_name+ " " + player.name}} {{player.position}}</a>
+
+      	<a ng-repeat="player in stat.players"  ng-if="player.position === 'ATD'" id="player_button" class="btn btn-default" ng-mousedown="stat.playerDrag()" ng-mousemove="stat.flag = 1" ng-mouseup="stat.statCount(player)">{{player.first_name+ " " + player.name}} {{player.position}}</a>
       </div>
       
     </div>  
