@@ -3,7 +3,7 @@
     <div class="col-xs-6">
       <div class="well">
         <h3>Ajoutez vous joueurs</h3>
-        <form class="form" role="form" novalidate ng-submit="players.addPlayer(players.number, players.first_name, players.name)">
+        <form class="form" role="form" novalidate ng-submit="players.addPlayer(players.number, players.first_name, players.name, players.position)">
           <div class="form-group">
             <input type="text" class="form-control" ng-model="players.number" placeholder="N° maillot">
           </div>
@@ -13,7 +13,22 @@
           <div class="form-group">
             <input type="text" class="form-control" ng-model="players.first_name" placeholder="Prénom">
           </div>
-
+	  <div class="form-group">
+	    <select class="form-control"  ng-model="players.position"  placeholder="Position">
+	      <option>GD</option>
+	      <option>DFG</option>
+	      <option>DFD</option>
+	      <option>ARG</option>
+	      <option>ARD</option>
+	      <option>MCG</option>
+	      <option>MCD</option>
+	      <option>MG</option>
+	      <option>MD</option>
+	      <option>ATG</option>
+	      <option>ATD</option>
+	      <option>REM</option>
+	    </select>
+	  </div>
           <button type="submit"  class="btn btn-default">Ajouter</button>
 	</form>
       </div>
@@ -30,14 +45,16 @@
           <th>N° maillot</th>
           <th>Prénom</th>
           <th>Nom</th>
+	  <th>Position</th>
           <th></th>
 	</tr>
       </thead>
       <tbody>
 	<tr ng-repeat="player in players.players">
-          <td><input type="text" ng-model="player.number"/>{{players.number}}</td>
-	  <td><input type="text" ng-model="player.name"/>{{players.name}}</td>
-          <td><input type="text" ng-model="player.first_name"/>{{players.first_name}}</td>
+          <td><input type="text" ng-model="player.number"/></td>
+	  <td><input type="text" ng-model="player.name"/></td>
+          <td><input type="text" ng-model="player.first_name"/></td>
+	  <td><input type="text" ng-model="player.position"/></td>
           <td>
             <button type="button" class="btn btn-link" ng-click="players.removePlayer(player)">Remove</button>
           </td>

@@ -8,6 +8,46 @@
 	box-shadow: none;
 }
 
+
+#div_player  .row{
+    margin-top: 3vh;
+}
+#player_button{
+    margin-left: 3vw;
+    border-radius: 50%;
+    width: 15%;
+    height: 18vh;
+}
+
+#div_player a{
+
+    line-height: 18vh;
+}
+
+#text-rem{
+    color: #ffffff;
+
+}
+
+#div-rem{
+    background: #3BE264;
+}
+#rem #player_button{
+    margin-left: 0;
+    border-radius: 50%;
+    width: 78%;
+    height: 18vh;
+    margin-top: 1vh;
+    line-height: 18vh;
+}
+
+#rem a{
+
+   
+}
+
+
+
 .edit input[type=text]:hover,
 .edit input[type=text]:focus {
 	border: 1px solid #d7cebf;
