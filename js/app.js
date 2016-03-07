@@ -209,7 +209,7 @@ angular.module('mvp', ['firebase', 'ui.router'])
  	};
 	
 	stat.playerDrag = function(){
-	    
+	    $('[id=player_button]').draggable();
 	    stat.flag = 0;
 	};
 	
