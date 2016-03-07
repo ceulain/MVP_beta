@@ -199,6 +199,7 @@ angular.module('mvp', ['firebase', 'ui.router'])
 	stat.players = MatchService.getPlayers();
 
 
+
 	stat.addSchema = function(schema){
 
 	    console.log("stat players: "+JSON.stringify(stat.players));
@@ -208,12 +209,10 @@ angular.module('mvp', ['firebase', 'ui.router'])
  	};
 	
 	stat.playerDrag = function(){
-	    $('[id=player_button]').draggable();
-	    stat.flag = 0;
-	 
 	    
+	    stat.flag = 0;
 	};
-	  
+	
 
 	//add player to stat.schema
 	//use in file stat.html
