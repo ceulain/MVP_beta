@@ -1,17 +1,18 @@
 .edit input[type=text] {
-	border: 1px solid #ffffff;
-	width: 100%;
-	resize: none;
-	background-color: #ffffff;
-	-webkit-box-shadow: none;
-	-moz-box-shadow: none;
-	box-shadow: none;
+    border: 1px solid #ffffff;
+    width: 100%;
+    resize: none;
+    background-color: #ffffff;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
 }
 
 
 #div_player  .row{
     margin-top: 3vh;
 }
+
 #player_button{
     margin-left: 3vw;
     border-radius: 50%;
@@ -26,12 +27,14 @@
 
 #text-rem{
     color: #ffffff;
+    font-size: 25px;
 
 }
 
 #div-rem{
-    background: #3BE264;
+    background: #71A944;
 }
+
 #rem #player_button{
     margin-left: 0;
     border-radius: 50%;
@@ -42,35 +45,33 @@
 }
 
 #rem a{
-
-   
+    
 }
-
-
 
 .edit input[type=text]:hover,
 .edit input[type=text]:focus {
-	border: 1px solid #d7cebf;
-	outline: none
+    border: 1px solid #d7cebf;
+    outline: none
 }
 
 .aubergine {
-	color: #3B1F2B;
+    color: #3B1F2B;
 }
 
 .rouge {
-	color: #DE3900;
+    color: #DE3900;
 }
 
 .beige {
-	color: #DBDFAC;
+    color: #DBDFAC;
 }
 
 .gris {
-	color: #5F758E;
+    color: #5F758E;
 }
 
 .violet {
-	color: #383961;
+    color: #383961;
 }
 
+/**/

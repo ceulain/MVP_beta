@@ -1,4 +1,5 @@
-<div class="container">
+<!-- Tableau recapitulatif des joueurs -->
+<!-- <div class="container">
 
   <h3>Mon équipe</h3>
   <div class="well">
@@ -6,24 +7,28 @@
       <thead>
         <tr>
           <th>Maillot</th>
-          <th>Joueur</th>
+          <th>Joueur</th>-->
+
           <!-- <th>Score</th> -->
-        </tr>
+        <!-- </tr>
       </thead>
       <tbody>
         <tr ng-repeat="player in stat_player.players">
           <td>{{player.number}}</td>
-          <td>{{player.name}}</td>
+          <td>{{player.name}}</td>-->
+
           <!-- <td>{{contestant.score}}</td> -->
-        </tr>
+        <!-- </tr>
       </tbody>
     </table>
-  </div>
+  </div> -->  
+
+
 
   <!-- <h3>Tableau d'analyse brut (passes)</h3> -->
   <!-- {{stat_player.countPass()}} -->
   <!-- {{stat_player.totalBall()}} -->
-  
+
   <!-- <div class="well"> -->
   <!--   <table class="table" id="table_pass"> -->
   <!--     <thead> -->
@@ -50,68 +55,187 @@
   <!--   </table> -->
   <!-- </div> -->
 
-  <h3>Tableau récapitulatif général</h3>
-  <div class="well">
-    <table class="table table-striped table-bordered table-hover table-condensed">
-      <thead>
-        <tr>
-          <th></th>
-          <th></th>
-          <!-- CREER UN COMPTEUR? -->
-          <th>Min</th>
-          <th>Ballons joués</th>
-          <th>Ballons perdus</th>
-          <th>% de passes réussies</th>
-          <th>Ballons récupérés</th>
-          <th>Geste Défensif</th>
-          <th>% de relance</th>
-          <th>Tir</th>
-          <th>Tir Cadré</th>
-          <th>Passe Décisive</th>
-          <th>Avant Passe Décisive</th>
-          <th>But</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr ng-repeat="player in stat_player.players">
-          {{$index}}
-          <td>{{player.number}}</td>
-          <td>{{player.name +" "+player.first_name}}</td>
+  <h1>Tableau récapitulatif général</h1>
 
-          <!-- CREER UN COMPTEUR? -->
-          <td>nb min jouées</td>
+  <div class="panel panel-info">
+    <div class="well" style="margin-left: 20px; margin-right: 20px; margin-top: 20px">
+      <table class="table table-striped table-bordered table-hover table-condensed">
+        <thead>
+          <tr>
+            <th></th>
+            <th></th>
+            <th>Min</th>
+            <th>Ballons joués</th>
+            <th>Ballons perdus</th>
+            <th>% de passes réussies</th>
+            <th>Ballons récupérés</th>
+            <th>Geste Défensif</th>
+            <th>% de relance</th>
+            <th>Tir</th>
+            <th>Tir Cadré</th>
+            <th>Passe Décisive</th>
+            <th>Avant Passe Décisive</th>
+            <th>But</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="player in stat_player.players">
+            {{$index}}
+            <td>{{player.number}}</td>
+            <td>{{player.name +" "+player.first_name}}</td>
 
-          <td>{{player.ballon_joues}}</td>
-          <td>{{player.ballon_perdu}}</td>
-          <td>{{stat_player.percent_pass(player)}}</td>
-          <td>{{player.ballon_recup}}</td>
-          <td>{{player.geste_defensif}}</td>
-          <td>{{stat_player.percent(player)}}</td>
-          <td>{{stat_player.tirs(player)}}</td>
-          <td>{{player.tir_cadre}}</td>
-          <td>{{player.avant_passe_decisive}}</td>
-          <td>{{player.passe_decisive}}</td>
-          <td>{{player.but}}</td>
-        </tr>
-      </tbody>
-      <tfoot>
-        <tr>
-          <td></td>
-          <td><b>Total</b></td>
-          <td><!-- QUEL EST L INTERET D UN NB DE MIN ADDITIONNEES? --></td>
-          <td>{{stat_player.totalStat('ballon_joues')}}</td>
-          <td>{{stat_player.totalStat('ballon_perdu')}}</td>
-          <td>{{stat_player.avgRelance('percent_pass')}}</td>
-          <td>{{stat_player.totalStat('ballon_recup')}}</td>
-          <td>{{stat_player.totalStat('geste_defensif')}}</td>
-          <td>{{stat_player.avgRelance('pourc_relance')}}</td>
-          <td>{{stat_player.totalStat('tirs')}}</td>
-          <td>{{stat_player.totalStat('tir_cadre')}}</td>
-          <td>{{stat_player.totalStat('avant_passe_decisive')}}</td>
-          <td>{{stat_player.totalStat('passe_decisive')}}</td>
-          <td>{{stat_player.totalStat('but')}}</td>
-        </tr>
-      </tfoot>
-    </table>
+            <!-- CREER UN COMPTEUR? -->
+            <td>nb min jouées</td>
+
+            <td>{{player.ballon_joues}}</td>
+            <td>{{player.ballon_perdu}}</td>
+            <td>{{stat_player.percent_pass(player)}}</td>
+            <td>{{player.ballon_recup}}</td>
+            <td>{{player.geste_defensif}}</td>
+            <td>{{stat_player.percent(player)}}</td>
+            <td>{{stat_player.tirs(player)}}</td>
+            <td>{{player.tir_cadre}}</td>
+            <td>{{player.avant_passe_decisive}}</td>
+            <td>{{player.passe_decisive}}</td>
+            <td>{{player.but}}</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td></td>
+            <td class="table-info"><b>Total</b></td>
+            <td>min tot.</td>
+            <td>{{stat_player.totalStat('ballon_joues')}}</td>
+            <td>{{stat_player.totalStat('ballon_perdu')}}</td>
+            <td>{{stat_player.avgRelance('percent_pass')}}</td>
+            <td>{{stat_player.totalStat('ballon_recup')}}</td>
+            <td>{{stat_player.totalStat('geste_defensif')}}</td>
+            <td>{{stat_player.avgRelance('pourc_relance')}}</td>
+            <td>{{stat_player.totalStat('tirs')}}</td>
+            <td>{{stat_player.totalStat('tir_cadre')}}</td>
+            <td>{{stat_player.totalStat('avant_passe_decisive')}}</td>
+            <td>{{stat_player.totalStat('passe_decisive')}}</td>
+            <td>{{stat_player.totalStat('but')}}</td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
   </div>
-</div>
+
+  <div class="col-md-4 col-lg-7">
+    <div class="panel panel-info">
+      <div class="panel-body panel-info">
+        <form action="#" class="form-horizontal" role="form">
+          <input type="text" class="form-control" placeholder="Search actions ...">
+        </form>
+      </div>
+    </div>
+
+
+    <!-- CHRONOLOGIE -->
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <h3 style="padding-top: 15px" class="panel-title">Actions par ordre chronologique</h3>
+      </div>
+      <div class="panel-body">
+        <li>
+          <div class="time">00:30</div>
+          <div class="appointments">
+            <ul class="list-unstyled">
+              <li>
+                <div class="apt">
+                  <div class="btn-group btn-group-xs pull-right">
+                  </div>
+                  <a href="" class="text-regular strong"><i class="fa fa-fw fa-user"></i> Boulaye Sissako</a> <i class="text-muted fa fa-ellipsis-h"></i> passe à Lounis Ouaras
+                  <span class="label label-info">passe</span>
+                </div>
+              </li>
+              <li>
+                <div class="apt">
+                  <div class="btn-group btn-group-xs pull-right">
+
+                  </div>
+                  <a href="" class="text-regular strong"><i class="fa fa-fw fa-user"></i> Lounis Ouaras</a> <i class="text-muted fa fa-ellipsis-h"></i> passe à Atkhana Ba
+                  <span class="label label-info">passe</span>
+                </div>
+              </li>
+
+              <li>
+                <div class="apt">
+                  <div class="btn-group btn-group-xs pull-right">
+                  </div>
+                  <a href="" class="text-regular strong"><i class="fa fa-fw fa-user"></i> Atkhana Ba</a> <i class="text-muted fa fa-ellipsis-h"></i> effectue un tir non cadré
+                  <span class="label label-info">TNC</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </li>
+
+        <li>
+          <div class="time">01:50</div>
+          <i class="fa fa-dot-circle-o text-primary dot"></i>
+
+          <div class="appointments">
+            <ul class="list-unstyled">
+              <li>
+                <div class="apt">
+                  <div class="btn-group btn-group-xs pull-right">
+                  </div>
+                  <a href="" class="text-regular strong"><i class="fa fa-fw fa-user"></i> Boulaye Sissako</a> <i class="text-muted fa fa-ellipsis-h"></i> passe à Lounis Ouaras
+                  <span class="label label-info">passe</span>
+                </div>
+              </li>
+              <li>
+                <div class="apt">
+                  <div class="btn-group btn-group-xs pull-right">
+                  </div>
+                  <a href="" class="text-regular strong"><i class="fa fa-fw fa-user"></i> Lounis Ouaras</a> <i class="text-muted fa fa-ellipsis-h"></i> perd le ballon
+                  <span class="label label-info">/</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </li>
+
+
+
+        <li>
+          <span class="label label-warning"> ... </span>
+        </li>
+        <li>
+          <div class="time">10:00 </div>
+          <i class="fa fa-dot-circle-o text-primary dot"></i>
+          <div class="appointments">
+            <ul class="list-unstyled">
+              <li>
+                <div class="apt">
+                  <div class="btn-group btn-group-xs pull-right">
+                  </div>
+                  <a href="" class="text-regular strong"><i class="fa fa-fw fa-female"></i> Walid Tanjaoui</a> <i class="text-muted fa fa-stethoscope"></i> Carton Jaune
+                </div>
+              </li>
+
+              <li class="bg-primary-light text-danger">
+                <i class="fa fa-fw fa-clock-o"></i> Mi-Temps
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li>
+          <div class="time">48:03 </div>
+          <i class="fa fa-dot-circle-o text-primary dot"></i>
+          <div class="appointments">
+            <ul class="list-unstyled">
+              <li class="text text-success">
+                <div class="strong text-success"><i class="fa fa-fw fa-file-text-o"></i> Note :</div>
+                Anthony n'est pas pas dans le match. Il se cache!! 
+              </li>
+            </ul>
+          </div>
+        </li>
+        <li>
+          <span class="label label-warning"> ... </span>
+        </li>
+      </ul>
+    </div>
