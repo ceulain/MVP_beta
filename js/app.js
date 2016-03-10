@@ -1,3 +1,5 @@
+'use strict'
+
 angular.module('mvp', ['firebase', 'ui.router'])
     .constant('FIREBASE_URI', 'https://boos.firebaseio.com/')
 
@@ -68,14 +70,14 @@ angular.module('mvp', ['firebase', 'ui.router'])
 	//     var passe = $(selection).text();
 	//     passe++;   
 	//     $(selection).text(''+passe);
-	    
+	
 	// };
 
 	
 	// var calculateColumn = function(index){
 	//     var total = 0;
 	//     $('table#table_pass tbody tr').each(function(){
-		
+	
 	// 	var value = parseInt($('td', this).eq(index).text(), 10);
 
 	// 	if (!isNaN(value)){
@@ -96,13 +98,13 @@ angular.module('mvp', ['firebase', 'ui.router'])
 	// 	console.log(tr.children().eq(i).text());
 	// 	total += value;
 	//     }
-	    
+	
 	//     return total;
-	    
+	
 	// };
 
 	// stat_player.totalBall = function(){
-	    
+	
 	//     var numberTh = $('#table_pass thead th').size();
 	//     console.log('numberTh : '+numberTh);
 	//     for(var i = 1; i < numberTh-1; i++){
@@ -115,16 +117,16 @@ angular.module('mvp', ['firebase', 'ui.router'])
 	//     var selectionTr = 'tr#'+player.name+'_'+player.first_name;
 	//     var nbChild = $(selectionTr).children().size();
 	//     var total = 0;
-	    
+	
 	//     for(var i = 1; i < nbChild-1; i++){
-		
+	
 	// 	var valTd = $(selectionTr).children().eq(i).text();
 	// 	var valTdInt = parseInt(valTd, 10);
-		
+	
 	// 	if(!isNaN(valTdInt)){
 	// 	    total += valTdInt;
 	// 	}
-		
+	
 	//     }
 	//     $(selectionTr).children().eq(nbChild-1).text(total);
 
@@ -147,7 +149,7 @@ angular.module('mvp', ['firebase', 'ui.router'])
 	// 	    }
 
 	// 	}
-		
+	
 	//     }
 
 	// };
@@ -190,15 +192,46 @@ angular.module('mvp', ['firebase', 'ui.router'])
 	
     })
 
-    .controller('StatCtrl', function(MatchService){
+    .controller('StatCtrl', function(MatchService, $compile){
 	var stat = this;
 
 	stat.schemaMatch = [];
 	stat.schema = [];
 	stat.flag = 0;
+	stat.counter;
+	stat.minutes = 0;
+	stat.seconds = 0;
+	stat.textSeconds = null; 
+	stat.textMinutes = null;
+	stat.fullTime = null;
 	stat.players = MatchService.getPlayers();
 
 
+	stat.time = function(){
+	    stat.seconds++;
+	    
+	    if(stat.seconds > 59){
+		stat.seconds = 0;
+		stat.minutes++;	
+	    }
+	    
+	    
+	    stat.textMinutes = stat.minutes < 10 ? '0' + stat.minutes : stat.minutes;
+	    stat.textSeconds = stat.seconds < 10 ? '0' + stat.seconds : stat.seconds;
+	    stat.fullTime = stat.textMinutes+':'+stat.textSeconds;
+	    
+	    $('#timer').text(stat.textMinutes + ' : '+stat.textSeconds);
+	};
+
+
+	stat.stopTimer = function(){
+	    console.log('OK');
+	    return clearInterval(stat.counter);
+	};
+
+	stat.startTimer = function(){
+	    stat.counter = setInterval(stat.time, 1000);
+	};
 
 	stat.addSchema = function(schema){
 
@@ -218,10 +251,6 @@ angular.module('mvp', ['firebase', 'ui.router'])
 	//use in file stat.html
 	// <a ng-repeat="player in stat.players"  class="btn btn-default" ng-click="stat.statCount(player)">{{player.first_name+ " " + player.name}}</a> 
 	stat.statCount = function(player) {
-	  
-	 
-
-	    
 	    
 	    console.log(stat.flag);
 	    if(stat.flag === 0){
@@ -243,25 +272,27 @@ angular.module('mvp', ['firebase', 'ui.router'])
 	    // use in file stat.html
 	    //
 	    stat.schema.push(statistic);
+	    stat.schema.push(stat.fullTime);
+	    console.log(stat.schema);
 	    
 	    var lengthSchema = stat.schema.length;
 
 	    //if size of schema > 4, count passeur decisive and avant passeur decisive
 	    //increase of 1
 	    //stat.schema contains is an array of player
-	    if( statistic === 'but' && lengthSchema >= 4 ){
+	    if( statistic === 'but' && lengthSchema >= 5 ){
 
 
-		stat.schema[lengthSchema-3].passe_decisive++;
-		stat.schema[lengthSchema-4].avant_passe_decisive++;
-		MatchService.updatePlayer(stat.schema[lengthSchema-3]);
+		stat.schema[lengthSchema-4].passe_decisive++;
+		stat.schema[lengthSchema-5].avant_passe_decisive++;
 		MatchService.updatePlayer(stat.schema[lengthSchema-4]);
+		MatchService.updatePlayer(stat.schema[lengthSchema-5]);
 	    }
 	    
-	    if( statistic === 'but' && lengthSchema === 3 ){
+	    if( statistic === 'but' && lengthSchema === 4 ){
 		console.log('3');
-		stat.schema[lengthSchema-3].passe_decisive++;
-		MatchService.updatePlayer(stat.schema[lengthSchema-3]);
+		stat.schema[lengthSchema-4].passe_decisive++;
+		MatchService.updatePlayer(stat.schema[lengthSchema-4]);
 	    }
 
 	    stat.schema[0].ballon_recup++;
@@ -270,9 +301,9 @@ angular.module('mvp', ['firebase', 'ui.router'])
 
 	    console.log(stat.schema[lengthSchema-1]);
 	    //augmente la stat du joueur qu'il a effectué 
-	    stat.schema[lengthSchema-2][statistic]++;
+	    stat.schema[lengthSchema-3][statistic]++;
 	    
-	    MatchService.updatePlayer(stat.schema[lengthSchema-2]);
+	    MatchService.updatePlayer(stat.schema[lengthSchema-3]);
 	    
 	    stat.schemaMatch.push(stat.schema);
 	    //console.log(stat.schemaMatch);
@@ -378,7 +409,7 @@ angular.module('mvp', ['firebase', 'ui.router'])
 			  avant_passe_decisive: 0, ballon_joues: 0, ballon_recup: 0,
 			  pourc_relance: 0, 
 			  pourc_pass: 0, tirs: 0, percent_pass: 0, 
-			  };
+			 };
 
 	    //add to player to reference player
 	    service.players.$add(player);
