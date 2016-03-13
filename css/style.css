@@ -9,6 +9,9 @@
 }
 
 
+#action-button{
+    margin-top: 1vh;
+}
 #div_player  .row{
     margin-top: 3vh;
 }
@@ -21,7 +24,6 @@
 }
 
 #div_player a{
-
     line-height: 18vh;
 }
 
@@ -31,8 +33,13 @@
 
 }
 
+#timer-div{
+    float: right;
+}
+
 #div-rem{
     background: #71A944;
+    padding-bottom: 3vh;
 }
 
 #rem #player_button{

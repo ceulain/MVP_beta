@@ -1,40 +1,39 @@
-
 <h1>Ajoutez vos joueurs</h1>
-<form class="form" role="form" novalidate ng-submit="players.addPlayer(players.number, players.first_name, players.name, players.position)">
-  <div class="form-group">
-    <input type="text" class="form-control" ng-model="players.number" placeholder="N° maillot">
-  </div>
-  <div class="form-group">
-    <input type="text" class="form-control" ng-model="players.name" placeholder="Nom">
-  </div>
-  <div class="form-group">
-    <input type="text" class="form-control" ng-model="players.first_name" placeholder="Prénom">
-  </div>
-  <div class="form-group">
+<div>
+  <form class="form" role="form" novalidate ng-submit="players.addPlayer(players.number, players.first_name, players.name, players.position)">
+    <div class="form-group">
+      <input type="text" class="form-control" ng-model="players.number" placeholder="N° maillot">
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" ng-model="players.name" placeholder="Nom">
+    </div>
+    <div class="form-group">
+      <input type="text" class="form-control" ng-model="players.first_name" placeholder="Prénom">
+    </div>
+    <div class="form-group">
 
-    <select class="form-control"  ng-model="players.position"  placeholder="Position">
-      <option>GD</option>
-      <option>DFG</option>
-      <option>DFD</option>
-      <option>ARG</option>
-      <option>ARD</option>
-      <option>MCG</option>
-      <option>MCD</option>
-      <option>MG</option>
-      <option>MD</option>
-      <option>ATG</option>
-      <option>ATD</option>
-      <option>REM</option>
-    </select>
-  </div>
-  <button type="submit"  class="btn btn-default">Ajouter</button>
-</form>
+      <select class="form-control"  ng-model="players.position"  placeholder="Position">
+	<option>GD</option>
+	<option>DFG</option>
+	<option>DFD</option>
+	<option>ARG</option>
+	<option>ARD</option>
+	<option>MCG</option>
+	<option>MCD</option>
+	<option>MG</option>
+	<option>MD</option>
+	<option>ATG</option>
+	<option>ATD</option>
+	<option>REM</option>
+      </select>
+    </div>
+    <button type="submit"  class="btn btn-default">Ajouter</button>
+  </form>
 </div>
+
 <button style="margin-top: 10px;" class="btn btn-info"><a  style="color: white;" ui-sref="stat">Début du match</a></button>
-</div>
 
 
-</div>
 <div class="col-xs-6 col-sm-12">
   <h3>Mes Joueurs</h3>
   <table class="table edit">
@@ -61,7 +60,6 @@
   </table>
 </div>
 
-</div>
 
 
 

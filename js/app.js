@@ -40,7 +40,7 @@ angular.module('mvp', ['firebase', 'ui.router'])
 
 	stat_player.schema = MatchService.getSchema();
 	console.log(stat_player.schema);
-
+	
 
 
 	stat_player.totalStat = function(stat){
@@ -192,13 +192,13 @@ angular.module('mvp', ['firebase', 'ui.router'])
 	
     })
 
-    .controller('StatCtrl', function(MatchService, $compile){
+    .controller('StatCtrl', function(MatchService, $interval){
 	var stat = this;
 
 	stat.schemaMatch = [];
 	stat.schema = [];
 	stat.flag = 0;
-	stat.counter;
+	let counter;
 	stat.minutes = 0;
 	stat.seconds = 0;
 	stat.textSeconds = null; 
@@ -206,6 +206,14 @@ angular.module('mvp', ['firebase', 'ui.router'])
 	stat.fullTime = null;
 	stat.players = MatchService.getPlayers();
 
+
+	stat.setTimePlayer = function(){
+	    for (let player of stat.players){
+		console.log(player)
+		player.temps_jeu = $('#timer').text();
+		MatchService.updatePlayer(player);
+	    }
+	};
 
 	stat.time = function(){
 	    stat.seconds++;
@@ -226,27 +234,47 @@ angular.module('mvp', ['firebase', 'ui.router'])
 
 	stat.stopTimer = function(){
 	    console.log('OK');
-	    return clearInterval(stat.counter);
+	    if(angular.isDefined(counter)){
+		console.log('counter is defined stop')
+	 	$interval.cancel(counter);
+		counter = undefined;
+	    }
 	};
 
 	stat.startTimer = function(){
-	    stat.counter = setInterval(stat.time, 1000);
+	    if(angular.isDefined(counter)){
+		console.log('counter is defined')
+		return;
+
+	    }
+	    counter = $interval(stat.time, 1000);
 	};
 
 	stat.addSchema = function(schema){
 
+	    stat.setTimePlayer();
 	    console.log("stat players: "+JSON.stringify(stat.players));
 	    console.log(schema[0]);
 	    MatchService.addSchemaMatch(schema);
 	    
  	};
+
+	stat.droppable = function(){
+	    console.log('drop');
+	    $('#div-rem').droppable({
+		drop: function(){
+		    console.log('drop it ');
+		}
+	    });
+	};
 	
 	stat.playerDrag = function(){
+	    console.log('draggable');
 	    $('[id=player_button]').draggable();
 	    stat.flag = 0;
 	};
 	
-
+	stat.droppable();
 	//add player to stat.schema
 	//use in file stat.html
 	// <a ng-repeat="player in stat.players"  class="btn btn-default" ng-click="stat.statCount(player)">{{player.first_name+ " " + player.name}}</a> 
@@ -340,12 +368,13 @@ angular.module('mvp', ['firebase', 'ui.router'])
 
 	
     })
-    .controller('InfoMatchCtrl', function ( MatchService ){
+    .controller('InfoMatchCtrl', function ( MatchService, $location){
 
 	var team = this;
 	//create a new club with her name club, categorie of team and name coach 
 	team.createClub = function (club, category_team, coach){
 	    MatchService.createClub(club, category_team, coach);
+	    $location.path('/players');
 	};		
     })
 
@@ -408,7 +437,8 @@ angular.module('mvp', ['firebase', 'ui.router'])
 			  ballon_perdu: 0, passe_decisive: 0,
 			  avant_passe_decisive: 0, ballon_joues: 0, ballon_recup: 0,
 			  pourc_relance: 0, 
-			  pourc_pass: 0, tirs: 0, percent_pass: 0, 
+			  pourc_pass: 0, tirs: 0, percent_pass: 0,
+			  temps_jeu: '', temps_banc: '', temps_terrain: ''
 			 };
 
 	    //add to player to reference player
