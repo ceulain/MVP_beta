@@ -5,14 +5,14 @@ angular.module('mvp', ['ui.router', 'mvp.controllers', 'mvp.service'])
 
     .config(function config($stateProvider){
 	
-	// $stateProvider.state('welcome', {
-	//     url: "",
-	//     controller: "UserController as user",
-	//     templateUrl: "welcome.html"
-	// })
+	$stateProvider.state('welcome', {
+	    url: "",
+	    controller: "UserController as user",
+	    templateUrl: "welcome.html"
+	})
 	
 	$stateProvider.state('info_match', {
-	    url: "",
+	    url: "/info_match",
 	    controller: "InfoMatchCtrl as team",
 	    templateUrl: 'info_match.html'
 	})

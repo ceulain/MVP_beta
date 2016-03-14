@@ -1,0 +1,46 @@
+<div class="container">
+  <ul class="nav nav-pills">
+    <li role="presentation" class="active"><a href="#sign-in" aria-controls="sign-in" role="tab" data-toggle="tab">Connexion</a></li>
+    <li role="presentation"><a href="#sign-up" aria-controls="sign-up" role="tab" data-toggle="tab">Inscription</a></li>
+
+  </ul>
+
+
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane fade in active"  id="sign-in">
+      <form ng-submit="">
+	<div class="form-group">
+	  <input type="email" ng-model="user.user.email" class="form-control" placeholder="Email">
+	</div>
+	{{user.user.email}}
+	<div class="form-group">
+
+	  <input type="password" ng-model="user.user.password" class="form-control" placeholder="Password">
+	</div>
+	{{user.user.password}}
+
+	<button type="submit" class="btn btn-default">Submit</button>
+      </form>
+    </div>
+
+    <div role="tabpanel" class="tab-pane" id="sign-up">
+      <form ng-submit="user.signUp()">
+	<div class="form-group">
+	  <input type="text" ng-model="user.user.name" class="form-control" placeholder="Name">
+	</div>
+	<div class="form-group">
+
+	  <input type="text" ng-model="user.user.category" class="form-control" placeholder="Category">
+	</div>
+	<div class="form-group">
+
+	  <input type="email" ng-model="user.user.email" class="form-control" placeholder="Email">
+	</div>
+	<div class="form-group">
+	  <input type="password" ng-model="user.user.password" class="form-control" placeholder="Password">
+	</div>
+	<button type="submit" class="btn btn-default">Inscription</button>
+      </form>
+    </div>
+  </div>
+</div> <!-- <div class="container"> -->

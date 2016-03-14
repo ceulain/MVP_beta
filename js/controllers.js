@@ -1,8 +1,21 @@
 'use strict'
 
+
 angular.module('mvp.controllers', [])
 
-    .controller('UserController', function(){
+    .controller('UserController', function(UserService){
+    	let userCtrl = this;
+	
+    	userCtrl.user  = { email: '', password: '', category: '', name: ''};
+    	userCtrl.signUp = function(){
+    	    UserService.signUp(userCtrl.user)
+    		.success(function(data){
+    		    console.log(data);
+    		})
+    		.error(function(){
+    		    console.log(data);
+    		})
+    	};
 	
     })
 

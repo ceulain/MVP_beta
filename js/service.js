@@ -1,6 +1,22 @@
 'use strict'
 
+var url_api = 'http://localhost:5000/api/';
 angular.module('mvp.service', ['firebase'])
+
+    .factory('UserService', function($http, $httpParamSerializerJQLike){
+	return {
+
+	    signUp : function(user){
+	    	return $http({
+	    	    method: 'POST',
+	    	    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+	    	    data: $httpParamSerializerJQLike(user),
+	    	    url: url_api+'createTeam'
+	    	})
+	    },
+	}
+    })
+
     .service('MatchService', function($firebaseArray, FIREBASE_URI){
 
 	var service = this;
