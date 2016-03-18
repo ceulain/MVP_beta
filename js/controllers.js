@@ -4,7 +4,7 @@
 angular.module('mvp.controllers', [])
 
     .controller('UserController', function(UserService){
-    	let userCtrl = this;
+    	var userCtrl = this;
 	
     	userCtrl.user  = { email: '', password: '', category: '', name: ''};
     	userCtrl.signUp = function(){
