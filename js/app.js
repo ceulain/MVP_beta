@@ -208,11 +208,17 @@ angular.module('mvp', ['firebase', 'ui.router'])
 
 
 	stat.setTimePlayer = function(){
-	    for (let player of stat.players){
+	    /*for (let player of stat.players){
 		console.log(player)
 		player.temps_jeu = $('#timer').text();
 		MatchService.updatePlayer(player);
+	    }*/
+	    
+	    for(var i = 0; i < stat.player.length; i++){
+	    	stat.player[i].temps_jeu = $('#timer').text();	
+	    	MatchService.updatePlayer(stat.player[i]);
 	    }
+	    
 	};
 
 	stat.time = function(){
