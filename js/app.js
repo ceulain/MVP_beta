@@ -38,11 +38,8 @@ angular.module('mvp', ['ui.router', 'mvp.controllers', 'mvp.service'])
 
 	})
 	
+
     });
-
-
-
-
 
 
 
