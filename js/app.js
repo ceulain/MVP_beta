@@ -198,7 +198,7 @@ angular.module('mvp', ['firebase', 'ui.router'])
 	stat.schemaMatch = [];
 	stat.schema = [];
 	stat.flag = 0;
-	let counter;
+	var counter;
 	stat.minutes = 0;
 	stat.seconds = 0;
 	stat.textSeconds = null; 
