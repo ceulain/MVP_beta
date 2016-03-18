@@ -29075,7 +29075,7 @@ fieldset[disabled] .owl-preview .owl-controls .owl-nav > div {
 .owl-theme .owl-controls.clickable .owl-page:hover span {
   background: #26a69a;
 }
-.slick-slider {
+/*.slick-slider {
   padding-bottom: 35px;
   margin: 0;
 }
@@ -29104,7 +29104,7 @@ fieldset[disabled] .owl-preview .owl-controls .owl-nav > div {
 }
 .slick-dots li.slick-active button:before {
   color: #26a69a;
-}
+}*/
 .gallery-image {
   margin: 0;
 }
