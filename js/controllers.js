@@ -191,6 +191,7 @@ angular.module('mvp.controllers', [])
 	stat.textSeconds = null; 
 	stat.textMinutes = null;
 	stat.fullTime = null;
+	stat.background = null;
 	stat.players = MatchService.getPlayers();
 
 
@@ -257,7 +258,9 @@ angular.module('mvp.controllers', [])
 	
 	stat.playerDrag = function(){
 	    console.log('draggable');
+	    // stat.background = 'background-blue';
 	    $('[id=player_button]').draggable();
+	    
 	    stat.flag = 0;
 	};
 	
@@ -266,7 +269,7 @@ angular.module('mvp.controllers', [])
 	//use in file stat.html
 	// <a ng-repeat="player in stat.players"  class="btn btn-default" ng-click="stat.statCount(player)">{{player.first_name+ " " + player.name}}</a> 
 	stat.statCount = function(player) {
-	    
+	    stat.background = '';
 	    console.log(stat.flag);
 	    if(stat.flag === 0){
 		console.log('click');

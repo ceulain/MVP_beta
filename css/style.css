@@ -8,6 +8,9 @@
     box-shadow: none;
 }
 
+.background-blue{
+    background: blue;
+}
 
 #action-button{
     margin-top: 1vh;

@@ -23,7 +23,7 @@
 <div class="col-xs-10 text-center" id="div_player">
   
   <div class="row">
-    <a ng-repeat="player in stat.players"  ng-if="player.position === 'ATG'" id="player_button" class="btn btn-default" ng-mousedown="stat.playerDrag()" ng-mousemove="stat.flag = 1" ng-mouseup="stat.statCount(player)">{{player.first_name+ " " + player.name}} </a>
+    <a ng-repeat="player in stat.players" ng-if="player.position === 'ATG'" id="player_button" class="btn btn-default" ng-mousedown="stat.playerDrag()" ng-mousemove="stat.flag = 1" ng-mouseup="stat.statCount(player)">{{player.first_name+ " " + player.name}}</a>
 
     <a ng-repeat="player in stat.players"  ng-if="player.position === 'ATD'" id="player_button" class="btn btn-default" ng-mousedown="stat.playerDrag()" ng-mousemove="stat.flag = 1" ng-mouseup="stat.statCount(player)">{{player.first_name+ " " + player.name}} </a>
   </div>
