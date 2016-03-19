@@ -10,7 +10,6 @@ angular.module('mvp', ['ui.router', 'mvp.controllers', 'mvp.service'])
 	//     controller: "UserController as user",
 	//     templateUrl: "welcome.html"
 	// })
-
 	
 	$stateProvider.state('info_match', {
 	    url: "",
@@ -29,8 +28,6 @@ angular.module('mvp', ['ui.router', 'mvp.controllers', 'mvp.service'])
 	    templateUrl: 'stat.html'
 
 	})
-
-
 	$stateProvider.state('stat_players',{
 	    url: "/stat_player",
 	    controller: "StatPlayerCtrl as stat_player",
